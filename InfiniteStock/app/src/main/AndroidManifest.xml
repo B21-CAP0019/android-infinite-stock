@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InfiniteStock">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ReportStockActivity"></activity>
+        <activity android:name=".StockActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
