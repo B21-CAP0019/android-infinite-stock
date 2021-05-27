@@ -13,4 +13,104 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="etUname">
+        <item name="android:layout_width"> 0dp </item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginStart"> 24dp </item>
+        <item name="android:layout_marginTop"> 96dp </item>
+        <item name="android:layout_marginEnd"> 24dp </item>
+    </style>
+
+    <style name="etPassword">
+        <item name="android:layout_width"> 0dp </item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginStart"> 24dp </item>
+        <item name="android:layout_marginTop"> 8dp </item>
+        <item name="android:layout_marginEnd"> 24dp </item>
+    </style>
+
+    <style name="tvLogin">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginStart"> 306dp </item>
+        <item name="android:layout_marginTop"> 31dp </item>
+        <item name="android:layout_marginEnd"> 306dp </item>
+        <item name="android:layout_marginBottom"> 46dp </item>
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize"> 40dp </item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="btLogin">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> start </item>
+        <item name="android:layout_marginStart"> 48dp </item>
+        <item name="android:layout_marginTop"> 16dp </item>
+        <item name="android:layout_marginEnd"> 48dp </item>
+        <item name="android:layout_marginBottom"> 64dp </item>
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize"> 25dp </item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="pbLogin">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_marginStart"> 32dp </item>
+        <item name="android:layout_marginTop"> 64dp </item>
+        <item name="android:layout_marginEnd"> 32dp </item>
+        <item name="android:layout_marginBottom"> 64dp </item>
+    </style>
+
+    <style name="btSignUp">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> start </item>
+        <item name="android:layout_marginStart"> 309dp </item>
+        <item name="android:layout_marginTop"> 30dp </item>
+        <item name="android:layout_marginEnd"> 303dp </item>
+        <item name="android:layout_marginBottom"> 422dp </item>
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize"> 15dp </item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="tvAkun">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginStart"> 309dp </item>
+        <item name="android:layout_marginEnd"> 303dp </item>
+        <item name="android:layout_marginBottom"> 422dp </item>
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize"> 20dp </item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="tvSignUp">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginStart"> 138dp </item>
+        <item name="android:layout_marginTop"> 43dp </item>
+        <item name="android:layout_marginEnd"> 119dp </item>
+        <item name="android:layout_marginBottom"> 619dp </item>
+        <item name="android:textColor">@color/teal_700</item>
+        <item name="android:textSize"> 30dp </item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="btSignUpAct">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:layout_marginStart"> 109dp </item>
+        <item name="android:layout_marginTop"> 70dp </item>
+        <item name="android:layout_marginEnd"> 116dp </item>
+        <item name="android:layout_marginBottom"> 70dp </item>
+    </style>
+
 </resources>
