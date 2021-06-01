@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.stock.EntryStockFragment"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -41,6 +41,7 @@
         android:clickable="true"
         android:src="@drawable/ic_baseline_add_circle_outline_32"
         app:layout_constraintBottom_toBottomOf="@+id/entry_list"
-        app:layout_constraintEnd_toEndOf="@+id/entry_list" />
+        app:layout_constraintEnd_toEndOf="@+id/entry_list"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
