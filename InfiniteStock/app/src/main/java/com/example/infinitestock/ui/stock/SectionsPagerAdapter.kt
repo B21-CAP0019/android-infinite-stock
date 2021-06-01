@@ -9,8 +9,8 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
-            0 -> fragment = EntryStockFragment()
-            1 -> fragment = ExitStockFragment()
+            0 -> fragment = ExitStockFragment()
+            1 -> fragment = EntryStockFragment()
         }
         return fragment as Fragment
     }
