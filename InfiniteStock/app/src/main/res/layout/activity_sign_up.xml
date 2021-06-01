@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".SignUpActivity">
-
 
     <TextView
         android:id="@+id/tvSignUp"
-        style="@style/tvSignUp"
-        android:text="Sign Up"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_up"
+        android:textColor="@color/teal_700"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,101 +25,63 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="379dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSignUp"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="321dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/etRepeatPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="250dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/sign_up"
-        style="@style/btSignUpAct"
-        android:enabled="false"
-        android:text="@string/action_sign_up"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusTopStart="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etRepeatPassword"
-        app:layout_constraintVertical_bias="0.149" />
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/editTextTextPostalAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="1dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPostalAddress"
         app:layout_constraintBottom_toTopOf="@+id/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etRepeatPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:ignore="LabelFor" />
 
-    <ImageButton
-        android:id="@+id/ibPemilik"
+    <Button
+        android:id="@+id/sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintEnd_toStartOf="@+id/ibPegawai"
+        android:text="@string/action_sign_up"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignUp"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress" />
 
-    <ImageButton
-        android:id="@+id/ibPegawai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toEndOf="@+id/ibPemilik"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignUp"
-        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

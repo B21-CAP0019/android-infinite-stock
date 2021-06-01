@@ -7,7 +7,6 @@
     tools:context=".ui.stock.EntryInputFragment"
     android:padding="16dp">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
