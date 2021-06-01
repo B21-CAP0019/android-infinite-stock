@@ -1,9 +1,10 @@
-package com.example.infinitestock
+package com.example.infinitestock.ui.stock
 
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.infinitestock.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -26,8 +27,8 @@ class StockActivity : AppCompatActivity() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
+                R.string.tab_text_1,
+                R.string.tab_text_2
         )
     }
 }

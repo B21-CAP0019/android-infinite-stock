@@ -1,4 +1,4 @@
-package com.example.infinitestock
+package com.example.infinitestock.ui.stock
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

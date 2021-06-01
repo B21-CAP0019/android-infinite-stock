@@ -1,4 +1,4 @@
-package com.example.infinitestock
+package com.example.infinitestock.ui.stock
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,25 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.infinitestock.R
 
-class EntryStockFragment : Fragment() {
+class ExitStockFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EntryStockFragment()
+        fun newInstance() = ExitStockFragment()
     }
 
-    private lateinit var viewModel: EntryStockViewModel
+    private lateinit var viewModel: ExitStockViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.entry_stock_fragment, container, false)
+        return inflater.inflate(R.layout.exit_stock_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EntryStockViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ExitStockViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
