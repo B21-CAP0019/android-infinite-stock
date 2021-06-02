@@ -31,6 +31,7 @@ class EntryStockFragment : Fragment() {
         val mfragment = mFragmentManager?.findFragmentByTag(EntryInputFragment::class.java.simpleName)
         binding.fabAdd.setOnClickListener {
             if (mfragment !is EntryInputFragment) {
+                viewModel.tempString = ""
                 if (mFragmentManager != null) {
                     mFragmentManager
                         .beginTransaction()
@@ -68,13 +69,13 @@ class EntryStockFragment : Fragment() {
                 val nfragment = nFragmentManager?.findFragmentByTag(EntryInputFragment::class.java.simpleName)
                 binding.fabAdd.setOnClickListener {
                     if (nfragment !is EntryInputFragment) {
+                        viewModel.tempString = data.name
                         if (nFragmentManager != null) {
                             nFragmentManager
                                 .beginTransaction()
                                 .replace(R.id.view_pager, nHomeFragment, EntryInputFragment::class.java.simpleName)
                                 .commit()
                         }
-                        viewModel.tempString = data.name
                     }
                 }
             }

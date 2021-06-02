@@ -5,7 +5,7 @@ import com.example.infinitestock.entity.StockItem
 
 class EntryStockViewModel : ViewModel() {
     private var items = arrayListOf<StockItem>()
-    var tempString = String()
+    var tempString: String = ""
 
     fun getAllItems(): ArrayList<StockItem> {
         return items
@@ -17,10 +17,12 @@ class EntryStockViewModel : ViewModel() {
 
     fun addItem(item: StockItem) {
         if (searchId(item.name) == -1) {
+            item.stockId = items.size
             items.add(item)
         } else {
             editItem(item.name, item)
         }
+        tempString = ""
     }
 
     fun editItem(string: String, item: StockItem) {
@@ -30,6 +32,7 @@ class EntryStockViewModel : ViewModel() {
         } else {
             items.set(id, item)
         }
+        tempString = ""
     }
 
     fun removeItem(item: StockItem) {
