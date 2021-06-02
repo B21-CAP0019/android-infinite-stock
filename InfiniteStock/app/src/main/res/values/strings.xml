@@ -30,4 +30,20 @@
         <item>Liter</item>
         <item>mL</item>
     </string-array>
+
+
+    <!--Text In Activity Layout-->
+    <string name="header_signin">Sign In</string>
+    <string name="header_signup">Sign Up</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="asking_account">Don't Have Account?</string>
+    <string name="header_main">Goods Stock</string>
+    <string name="empty_goods">You haven't input any goods yet</string>
+    <string name="header_add_goods">Add Goods</string>
+    <string name="hint_goods_name">Goods Name</string>
+    <string name="hint_goods_quantity">Quantity</string>
+    <string name="hint_goods_unit">Unit</string>
+    <string name="hint_goods_price">Goods Price</string>
+    <string name="indonesian_valuta">Rp</string>
 </resources>

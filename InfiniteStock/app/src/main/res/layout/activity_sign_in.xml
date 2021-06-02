@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    tools:context=".SignUpActivity">
+    >
     <ImageView
-        android:id="@+id/logo_signup"
+        android:id="@+id/logo_signin"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
@@ -15,21 +14,21 @@
         android:scaleType="fitXY"
         tools:ignore="ContentDescription" />
     <TextView
-        android:id="@+id/header_signup"
+        android:id="@+id/header_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/header_signup"
+        android:text="@string/header_signin"
         android:textSize="35sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/logo_signup"
+        android:layout_below="@+id/logo_signin"
         android:layout_marginTop="40dp"
         android:textColor="@color/black"/>
     <EditText
-        android:id="@+id/value_signup_email"
+        android:id="@+id/value_signin_email"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        android:layout_below="@+id/header_signup"
+        android:layout_below="@+id/header_signin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/input_background"
@@ -40,10 +39,10 @@
         android:paddingVertical="10dp"
         tools:ignore="Autofill" />
     <EditText
-        android:id="@+id/value_signup_pass"
+        android:id="@+id/value_signin_pass"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        android:layout_below="@+id/value_signup_email"
+        android:layout_below="@+id/value_signin_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/input_background"
@@ -54,13 +53,23 @@
         android:paddingVertical="10dp"
         tools:ignore="Autofill" />
     <ImageButton
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_signin"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/value_signup_pass"
+        android:layout_below="@+id/value_signin_pass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_btn"
         android:src="@drawable/ic_check"
         tools:ignore="ContentDescription" />
+    <TextView
+        android:id="@+id/text_to_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/asking_account"
+        android:layout_below="@id/btn_signin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 </RelativeLayout>
