@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.ListItemAdapter
 import com.example.infinitestock.R
-import com.example.infinitestock.databinding.EntryStockFragmentBinding
+import com.example.infinitestock.databinding.FragmentEntryStockBinding
 import com.example.infinitestock.entity.StockItem
 
 class EntryStockFragment : Fragment() {
@@ -19,7 +19,7 @@ class EntryStockFragment : Fragment() {
     }
 
     private lateinit var viewModel: EntryStockViewModel
-    private var _binding: EntryStockFragmentBinding? = null
+    private var _binding: FragmentEntryStockBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class EntryStockFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = EntryStockFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentEntryStockBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
