@@ -25,20 +25,6 @@ class EntryStockFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EntryStockViewModel::class.java)
-
-        val mFragmentManager = fragmentManager
-        val mHomeFragment = EntryInputFragment()
-        val mfragment = mFragmentManager?.findFragmentByTag(EntryInputFragment::class.java.simpleName)
-        binding.fabAdd.setOnClickListener {
-            if (mfragment !is EntryInputFragment) {
-                if (mFragmentManager != null) {
-                    mFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.view_pager, mHomeFragment, EntryInputFragment::class.java.simpleName)
-                        .commit()
-                }
-            }
-        }
     }
 
     override fun onCreateView(
@@ -54,6 +40,21 @@ class EntryStockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showRecyclerList(viewModel.getAllItems())
+
+        val mFragmentManager = fragmentManager
+        val mHomeFragment = EntryInputFragment()
+        val mfragment = mFragmentManager?.findFragmentByTag(EntryInputFragment::class.java.simpleName)
+        binding.fabAdd.setOnClickListener {
+            if (mfragment !is EntryInputFragment) {
+                viewModel.tempString = ""
+                if (mFragmentManager != null) {
+                    mFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.view_pager, mHomeFragment, EntryInputFragment::class.java.simpleName)
+                        .commit()
+                }
+            }
+        }
     }
 
     private fun showRecyclerList(listItem: ArrayList<StockItem>) {
@@ -68,13 +69,13 @@ class EntryStockFragment : Fragment() {
                 val nfragment = nFragmentManager?.findFragmentByTag(EntryInputFragment::class.java.simpleName)
                 binding.fabAdd.setOnClickListener {
                     if (nfragment !is EntryInputFragment) {
+                        viewModel.tempString = data.name
                         if (nFragmentManager != null) {
                             nFragmentManager
                                 .beginTransaction()
-                                .replace(R.id.view_pager, nHomeFragment, EntryInputFragment::class.java.simpleName)
+                                .replace(R.id.recyclerView, nHomeFragment, EntryInputFragment::class.java.simpleName)
                                 .commit()
                         }
-                        viewModel.tempString = data.name
                     }
                 }
             }

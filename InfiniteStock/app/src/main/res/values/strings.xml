@@ -21,6 +21,14 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="masukkan_nama_produk">Masukkan nama produk</string>
+    <string name="banyak_produk_ditambahkan">Banyak produk ditambahkan</string>
+    <string name="satuan">Satuan</string>
+    <string name="masukkan_angka">Masukkan angka</string>
+    <string name="kg_ons_ml">kg, ons, ml,...</string>
+    <string name="tambahkan">Tambahkan</string>
+    <string name="transaksi_gudang">Transaksi Gudang</string>
+    <string name="laporan_gudang">Laporan Gudang</string>
 
 
     <string-array name="metrics_array">

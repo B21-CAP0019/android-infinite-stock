@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.FragmentEntryInputBinding
+import com.example.infinitestock.entity.StockItem
 
 class EntryInputFragment : Fragment() {
 
@@ -34,13 +35,34 @@ class EntryInputFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set autocomplete bagian satuan
         // Get a reference to the AutoCompleteTextView in the layout
-        val textView = view.findViewById(R.id.multiAutoCompleteTextView) as AutoCompleteTextView
+        val textView = view.findViewById(R.id.input_metric) as AutoCompleteTextView
         // Get the string array
-        val metrics: Array<out String> = resources.getStringArray(R.array.metrics_array)
+        val countries: Array<out String> = resources.getStringArray(R.array.metrics_array)
         // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_1, metrics).also { adapter ->
+        ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_1, countries).also { adapter ->
             textView.setAdapter(adapter)
+        }
+
+        // Menampilkan data jika aksi yang ingin dilakukan adalah edit
+        lateinit var item: StockItem
+        if (viewModel.tempString != "") {
+            item = viewModel.getItem(viewModel.tempString)
+
+            binding.button.text = "EDIT"
+            binding.inputName.setText(item.name)
+            binding.inputQty.setText(item.stock)
+            //binding.inputMetric.setText(???)
+        }
+
+        // Menerima objek yang diinputkan
+        binding.button.setOnClickListener {
+            val mItem= StockItem()
+            mItem.name = binding.inputName.text.toString().trim()
+            mItem.stock =binding.inputQty.text.toString().trim().toInt()
+
+            viewModel.addItem(mItem)
         }
     }
 }
