@@ -10,5 +10,5 @@
     <color name="bg_color">#e4fbff</color>
     <color name="light_object_color">#b8b5ff</color>
     <color name="dark_object_color">#7868e6</color>
-    <color name="transparent">##00FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
