@@ -11,7 +11,7 @@
         android:theme="@style/Theme.InfiniteStock">
         <activity android:name=".ReportStockActivity" />
         <activity android:name=".ui.stock.StockActivity" />
-        <activity android:name=".ui.main.AddGoodsActivity"/>
+        <activity android:name=".ui.add.AddGoodsActivity"/>
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>

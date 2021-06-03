@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.FragmentEntryInputBinding
-import com.example.infinitestock.entity.StockItem
+import com.example.infinitestock.data.entity.StockItem
 import com.example.infinitestock.ui.stock.entrystock.EntryStockViewModel
 
 class EntryInputFragment : Fragment() {

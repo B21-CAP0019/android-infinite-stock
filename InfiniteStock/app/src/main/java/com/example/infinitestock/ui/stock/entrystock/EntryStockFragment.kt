@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.ListItemAdapter
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.FragmentEntryStockBinding
-import com.example.infinitestock.entity.StockItem
+import com.example.infinitestock.data.entity.StockItem
 import com.example.infinitestock.ui.stock.input.EntryInputFragment
 
 class EntryStockFragment : Fragment() {

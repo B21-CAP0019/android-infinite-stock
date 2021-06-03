@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.databinding.ItemRowBinding
-import com.example.infinitestock.entity.StockItem
+import com.example.infinitestock.data.entity.StockItem
 
 class ListItemAdapter(private val listItem: ArrayList<StockItem>): RecyclerView.Adapter<ListItemAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback

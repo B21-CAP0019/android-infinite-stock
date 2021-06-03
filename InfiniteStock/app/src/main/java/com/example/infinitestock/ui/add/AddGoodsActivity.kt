@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.main
+package com.example.infinitestock.ui.add
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

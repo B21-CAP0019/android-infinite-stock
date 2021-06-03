@@ -1,4 +1,4 @@
-package com.example.infinitestock.entity
+package com.example.infinitestock.data.entity
 
 data class StockItem(
     var stockId: Int = 0,

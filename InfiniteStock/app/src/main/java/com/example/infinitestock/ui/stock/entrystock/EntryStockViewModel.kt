@@ -1,7 +1,7 @@
 package com.example.infinitestock.ui.stock.entrystock
 
 import androidx.lifecycle.ViewModel
-import com.example.infinitestock.entity.StockItem
+import com.example.infinitestock.data.entity.StockItem
 
 class EntryStockViewModel : ViewModel() {
     private var items = arrayListOf<StockItem>()
