@@ -11,14 +11,14 @@ class SessionCompat(context: Context) {
 
     private val preference = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-    fun getPublicId() : Account {
+    fun getAccount() : Account {
         val publicId = preference.getString(PUBLIC_ID, "")
         return Account(
             publicId = publicId
         )
     }
 
-    fun setPublicId(account: Account) {
+    fun setAccount(account: Account) {
         val publicId = account.publicId
 
         with (preference.edit()) {

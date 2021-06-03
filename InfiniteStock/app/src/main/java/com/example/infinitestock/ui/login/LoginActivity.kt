@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                         publicId = response.getString("public_id")
                     )
 
-                    SessionCompat(this@LoginActivity).setPublicId(account)
+                    SessionCompat(this@LoginActivity).setAccount(account)
 
                     Toast.makeText(
                         this@LoginActivity,
