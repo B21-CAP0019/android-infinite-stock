@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Glide.with(this@MainActivity)
             .load(R.drawable.logo)
             .into(binding.appbarMain.logoMain)
-        setContentView(binding.root)
 
         binding.btnToAddGoods.setOnClickListener {
             val intentToAddGoodsActivity = Intent(this@MainActivity, AddGoodsActivity::class.java)
