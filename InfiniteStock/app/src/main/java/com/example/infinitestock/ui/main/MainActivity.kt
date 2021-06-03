@@ -1,4 +1,4 @@
-package com.example.infinitestock
+package com.example.infinitestock.ui.main
 
 import android.os.Bundle
 import android.os.PersistableBundle
