@@ -157,8 +157,14 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <TableLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
