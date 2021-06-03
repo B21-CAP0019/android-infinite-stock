@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.stock
+package com.example.infinitestock.ui.stock.exitstock
 
 import androidx.lifecycle.ViewModel
 

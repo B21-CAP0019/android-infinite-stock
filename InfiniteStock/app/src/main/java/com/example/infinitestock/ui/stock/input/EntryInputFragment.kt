@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.stock
+package com.example.infinitestock.ui.stock.input
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.FragmentEntryInputBinding
 import com.example.infinitestock.entity.StockItem
+import com.example.infinitestock.ui.stock.entrystock.EntryStockViewModel
 
 class EntryInputFragment : Fragment() {
 
