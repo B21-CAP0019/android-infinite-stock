@@ -1,8 +1,9 @@
 package com.example.infinitestock.ui.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
+        Glide.with(this@MainActivity)
+            .load(R.drawable.logo)
+            .into(binding.appbarMain.logoMain)
         setContentView(binding.root)
     }
 

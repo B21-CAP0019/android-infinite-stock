@@ -63,4 +63,5 @@
     <string name="notif_insufficient_predict">Insufficient stock to make prediction!</string>
     <string name="date_header_column">Date</string>
     <string name="prediction_header_column">Prediction</string>
+    <string name="product_name">Infinite Stock</string>
 </resources>

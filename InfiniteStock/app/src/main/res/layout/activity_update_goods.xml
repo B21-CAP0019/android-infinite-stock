@@ -18,13 +18,13 @@
             android:layout_below="@+id/appbar_update_goods"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
         <EditText
             android:id="@+id/value_update_goods_name"
             android:layout_width="350dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:background="@drawable/input_background"
             android:layout_below="@+id/header_update_goods"
             android:layout_marginStart="30dp"
@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/hint_goods_name"
             android:paddingHorizontal="20dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:inputType="text"
             tools:ignore="Autofill" />
         <RelativeLayout
@@ -44,12 +44,12 @@
             <EditText
                 android:id="@+id/indonesian_valuta"
                 android:layout_width="80dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="27dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/left_special_box"
                 android:hint="@string/indonesian_valuta"
-                android:textSize="25sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="20dp"
@@ -59,13 +59,13 @@
             <EditText
                 android:id="@+id/value_update_goods_price"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_toEndOf="@+id/indonesian_valuta"
                 android:layout_marginEnd="27dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/right_special_box"
                 android:hint="@string/hint_goods_price"
-                android:textSize="25sp"
+                android:textSize="18sp"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
@@ -112,11 +112,11 @@
             <EditText
                 android:id="@+id/value_update_goods_unit"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="50dp"
                 android:layout_toEndOf="@+id/goods_stock_update"
                 android:background="@drawable/input_background"
                 android:hint="@string/hint_goods_unit"
-                android:textSize="25sp"
+                android:textSize="18sp"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
                 android:inputType="text"
@@ -135,18 +135,18 @@
             <Button
                 android:id="@+id/btn_update_goods"
                 android:layout_width="120dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:text="@string/btn_update"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/btn_predict_goods"
                 android:layout_width="140dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/btn_predict"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
@@ -160,7 +160,7 @@
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:visibility="gone" />
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -173,23 +173,24 @@
             android:layout_below="@+id/text_insufficient_stock_predict"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
-            android:visibility="gone"
+
             >
             <TableRow
                 android:background="@color/light_object_color"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="10dp"
+                android:visibility="gone"
                 >
                 <TextView
                     android:text="@string/date_header_column"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:layout_weight="6"/>
                 <TextView
                     android:text="@string/prediction_header_column"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:gravity="center"
