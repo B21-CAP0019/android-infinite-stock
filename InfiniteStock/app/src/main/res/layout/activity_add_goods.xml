@@ -108,7 +108,7 @@
             tools:ignore="Autofill"/>
     </RelativeLayout>
     <ImageButton
-        android:id="@+id/btn_signin"
+        android:id="@+id/btn_to_okay_add_goods"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@+id/container_price"
