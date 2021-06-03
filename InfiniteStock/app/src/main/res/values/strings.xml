@@ -54,4 +54,13 @@
     <string name="hint_goods_unit">Unit</string>
     <string name="hint_goods_price">Goods Price</string>
     <string name="indonesian_valuta">Rp</string>
+    <string name="hint_confirmation_password">Retype Password</string>
+    <string name="header_update_goods">Update Goods</string>
+    <string name="btn_increase">+</string>
+    <string name="btn_decrease">-</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_predict">Predict</string>
+    <string name="notif_insufficient_predict">Insufficient stock to make prediction!</string>
+    <string name="date_header_column">Date</string>
+    <string name="prediction_header_column">Prediction</string>
 </resources>

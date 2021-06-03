@@ -53,11 +53,25 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         tools:ignore="Autofill" />
+    <EditText
+        android:id="@+id/value_confirmation_password"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/value_signup_pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/hint_confirmation_password"
+        android:textSize="25sp"
+        android:inputType="textPassword"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        tools:ignore="Autofill" />
     <ImageButton
         android:id="@+id/btn_signup"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/value_signup_pass"
+        android:layout_below="@+id/value_confirmation_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_btn"
