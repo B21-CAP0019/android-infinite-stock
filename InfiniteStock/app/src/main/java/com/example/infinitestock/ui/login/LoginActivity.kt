@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         params.put("email", email)
         params.put("password", password)
 
-        client.post(url, params, object: AsyncHttpResponseHandler() {
+        client.get(url, params, object: AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
@@ -111,8 +111,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
         })
-        val intentToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intentToMainActivity)
     }
 
     private fun switchLoading() {
