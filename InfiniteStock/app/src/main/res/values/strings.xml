@@ -1,4 +1,6 @@
 <resources>
+    <string name="server">http://34.67.174.149</string>
+
     <string name="app_name">Infinite Stock</string>
     <string name="title_activity_login">Login Activity</string>
     <string name="prompt_email">Email</string>

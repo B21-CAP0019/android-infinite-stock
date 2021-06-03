@@ -8,6 +8,7 @@ import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivitySignInBinding
 import com.example.infinitestock.ui.main.MainActivity
 import com.example.infinitestock.ui.signup.SignUpActivity
+import com.loopj.android.http.AsyncHttpClient
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,8 +25,7 @@ class LoginActivity : AppCompatActivity() {
             .into(binding.logoSignin)
 
         binding.btnSignin.setOnClickListener {
-            val intentToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intentToMainActivity)
+            onSignInClick()
         }
         binding.textToSignup.setOnClickListener {
             val intentToSignUpActivity = Intent(this@LoginActivity, SignUpActivity::class.java)
@@ -33,4 +33,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun onSignInClick() {
+        val email = binding.valueSigninEmail.text.toString()
+        val password = binding.valueSigninPass.text.toString()
+
+        val endpoint = resources.getString(R.string.server) + "/auth/signin"
+        val client = AsyncHttpClient()
+
+
+
+        val intentToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intentToMainActivity)
+    }
 }

@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
             .load(R.drawable.logo)
             .into(binding.appbarMain.logoMain)
         setContentView(binding.root)
+
     }
 
 }
