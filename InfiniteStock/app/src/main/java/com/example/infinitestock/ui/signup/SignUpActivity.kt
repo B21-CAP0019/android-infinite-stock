@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivitySignUpBinding
 import com.example.infinitestock.ui.login.LoginActivity
+import com.example.infinitestock.ui.main.MainActivity
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class SignUpActivity : AppCompatActivity() {
             .into(binding.logoSignup)
 
         binding.btnSignup.setOnClickListener {
-            val intentToLoginActivity = Intent(this@SignUpActivity, LoginActivity::class.java)
+            val intentToLoginActivity = Intent(this@SignUpActivity, MainActivity::class.java)
             startActivity(intentToLoginActivity)
         }
     }

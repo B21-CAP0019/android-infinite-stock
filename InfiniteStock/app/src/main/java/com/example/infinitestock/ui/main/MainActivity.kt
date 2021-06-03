@@ -1,5 +1,6 @@
 package com.example.infinitestock.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
             .load(R.drawable.logo)
             .into(binding.appbarMain.logoMain)
         setContentView(binding.root)
+
+        binding.btnToAddGoods.setOnClickListener {
+            val intentToAddGoodsActivity = Intent(this@MainActivity, AddGoodsActivity::class.java)
+            startActivity(intentToAddGoodsActivity)
+        }
 
     }
 
