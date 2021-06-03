@@ -51,7 +51,7 @@ class EntryStockFragment : Fragment() {
                 if (mFragmentManager != null) {
                     mFragmentManager
                         .beginTransaction()
-                        .replace(R.id.view_pager, mHomeFragment, EntryInputFragment::class.java.simpleName)
+                        .replace(R.id.main_stock_activity, mHomeFragment, EntryInputFragment::class.java.simpleName)
                         .commit()
                 }
             }
@@ -74,7 +74,7 @@ class EntryStockFragment : Fragment() {
                         if (nFragmentManager != null) {
                             nFragmentManager
                                 .beginTransaction()
-                                .replace(R.id.recyclerView, nHomeFragment, EntryInputFragment::class.java.simpleName)
+                                .replace(R.id.main_stock_activity, nHomeFragment, EntryInputFragment::class.java.simpleName)
                                 .commit()
                         }
                     }
