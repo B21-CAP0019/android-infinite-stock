@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivitySignUpBinding
-import com.example.infinitestock.ui.login.LoginActivity
 import com.example.infinitestock.ui.main.MainActivity
 
 class SignUpActivity : AppCompatActivity() {
