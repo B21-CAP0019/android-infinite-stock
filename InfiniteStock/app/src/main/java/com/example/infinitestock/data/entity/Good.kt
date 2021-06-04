@@ -1,6 +1,6 @@
 package com.example.infinitestock.data.entity
 
-data class Goods(
+data class Good(
     var goodsId: String? = null,
     var goodsName: String? = null,
     var goodsQuantity: Double? = null,
