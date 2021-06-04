@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.infinitestock.R
 import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.databinding.ActivitySplashScreenBinding
@@ -21,6 +22,10 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Glide.with(this)
+            .load(R.drawable.logo)
+            .into(binding.logoSplash)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val account = SessionCompat(this).getAccount()
@@ -39,6 +44,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 val intentToMain = Intent(this, MainActivity::class.java)
                 intentToMain.putExtra(MainActivity.EXTRA_ACCOUNT, account)
                 startActivity(intentToMain)
+                finishAffinity()
             }
         }, 3000)
     }

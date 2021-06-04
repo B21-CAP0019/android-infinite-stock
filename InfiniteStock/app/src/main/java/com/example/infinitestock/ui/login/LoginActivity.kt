@@ -66,8 +66,11 @@ class LoginActivity : AppCompatActivity() {
                 try {
                     val response = JSONObject(result)
 
+                    val accountData = response.getJSONObject("data")
                     val account = Account(
-                        publicId = response.getString("public_id")
+                        fullName = accountData.getString("full_name"),
+                        publicId = accountData.getString("public_id"),
+                        shopName = accountData.getString("shop_name")
                     )
 
                     SessionCompat(this@LoginActivity).setAccount(account)
