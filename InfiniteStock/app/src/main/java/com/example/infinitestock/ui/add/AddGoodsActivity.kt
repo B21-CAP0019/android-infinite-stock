@@ -2,7 +2,6 @@ package com.example.infinitestock.ui.add
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivityAddGoodsBinding
 import com.loopj.android.http.AsyncHttpClient
@@ -18,30 +17,34 @@ class AddGoodsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityAddGoodsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        Glide.with(this@AddGoodsActivity)
-            .load(R.drawable.logo)
-            .into(binding.appbarAddGoods.logoMain)
 
-        binding!!.btnToOkayAddGoods.setOnClickListener {
-            createGoodsClick()
+        with (binding) {
+            setContentView(root)
+
+            // toolbar
+            setSupportActionBar(appbarAddGoods.toolbar)
+            supportActionBar?.title = resources.getString(R.string.app_name)
+
+            btnToOkayAddGoods.setOnClickListener {
+                createGoodsClick()
+            }
         }
     }
 
     private fun createGoodsClick() {
-        val goods_name = binding?.valueGoodsName?.text.toString()
-        val goods_price = binding?.valueGoodsPrice?.text.toString()
-        val goods_quantity = binding?.valueGoodsQuantity?.text.toString()
-        val goods_unit = binding?.valueGoodsUnit?.text.toString()
+        val goodsName = binding.valueGoodsName.text.toString()
+        val goodsPrice = binding.valueGoodsPrice.text.toString()
+        val goodsQuantity = binding.valueGoodsQuantity.text.toString()
+        val goodsUnit = binding.valueGoodsUnit.text.toString()
 
         val url = resources.getString(R.string.server) + "/warehouse/create/goods"
         val client = AsyncHttpClient()
 
         val params = RequestParams()
-        params.put("name", goods_name)
-        params.put("price", goods_price)
-        params.put("quantity", goods_quantity)
-        params.put("unit", goods_unit)
+        params.put("name", goodsName)
+        params.put("price", goodsPrice)
+        params.put("quantity", goodsQuantity)
+        params.put("unit", goodsUnit)
 
         client.post(url, params, object: AsyncHttpResponseHandler() {
             override fun onSuccess(
