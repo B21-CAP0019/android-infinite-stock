@@ -8,14 +8,17 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.infinitestock.R
+import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.data.entity.Account
+import com.example.infinitestock.data.entity.WarehouseResponse
 import com.example.infinitestock.databinding.ActivityMainBinding
 import com.example.infinitestock.ui.add.AddGoodsActivity
-import com.loopj.android.http.AsyncHttpClient
+import com.example.infinitestock.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -61,7 +64,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-            getGoodsList()
+            val viewModel = ViewModelProvider(this@MainActivity)[
+                    GoodsViewModel::class.java
+            ]
+            viewModel.loadGoods().observe(this@MainActivity, { applyWarehouseResponse(it) })
+            viewModel.retrieveGoods(this@MainActivity, account)
 
             btnToAddGoods.setOnClickListener {
                 val intentToAddGoodsActivity = Intent(this@MainActivity, AddGoodsActivity::class.java)
@@ -82,7 +89,12 @@ class MainActivity : AppCompatActivity() {
                     .setTitle("Are you sure?")
                     .setMessage("Do you really want to logout from ${ resources.getString(R.string.app_name) }?")
                     .setPositiveButton("Yes, I do") { _, _ ->
-                        Toast.makeText(this, "SUCCESS LOGOUT", Toast.LENGTH_SHORT).show()
+                        SessionCompat(this).setAccount(Account(null, null, null))
+                        Toast.makeText(this, "You have been logged out.", Toast.LENGTH_SHORT).show()
+
+                        val intentToLogin = Intent(this, LoginActivity::class.java)
+                        startActivity(intentToLogin)
+                        finishAffinity()
                     }
                     .setNegativeButton("No", null)
                     .setCancelable(false)
@@ -92,11 +104,15 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun getGoodsList() {
-        val url = resources.getString(R.string.server) + "/warehouse/get/goods/all"
-        val client = AsyncHttpClient()
-
-        client.addHeader("x-access-publicid", account?.publicId)
+    private fun applyWarehouseResponse(response: WarehouseResponse) {
+        if (response.status == 200) {
+            if (response.totalData == 0) {
+                // TODO: When the data is empty
+            } else {
+                // TODO: When data is not empty
+            }
+        } else {
+            //TODO: If the response is error unexpectedly
+        }
     }
-
 }

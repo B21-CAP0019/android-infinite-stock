@@ -3,6 +3,7 @@ package com.example.infinitestock.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -34,9 +35,17 @@ class LoginActivity : AppCompatActivity() {
             .load(R.drawable.logo)
             .into(binding.logoSignin)
 
+        binding.valueSigninPass.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                onSignInClick()
+            }
+            return@setOnEditorActionListener true
+        }
+
         binding.btnSignin.setOnClickListener {
             onSignInClick()
         }
+
         binding.textToSignup.setOnClickListener {
             val intentToSignUpActivity = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intentToSignUpActivity)
@@ -106,9 +115,12 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 switchLoading()
 
+                val result = String(responseBody)
+                val response = JSONObject(result)
+
                 Toast.makeText(
                     this@LoginActivity,
-                    "[${ statusCode }]: ${ error?.message.toString() }",
+                    "[${ statusCode }]: ${ response.getString("message") } (${ error?.message.toString() })",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -120,10 +132,12 @@ class LoginActivity : AppCompatActivity() {
         with (binding) {
             if (!isLoading) {
                 btnSignin.visibility = View.GONE
-                progressBar.visibility = View.VISIBLE
+                loading.visibility = View.VISIBLE
+                textToSignup.visibility = View.GONE
             } else {
                 btnSignin.visibility = View.VISIBLE
-                progressBar.visibility = View.GONE
+                loading.visibility = View.GONE
+                textToSignup.visibility = View.VISIBLE
             }
 
             isLoading = !isLoading

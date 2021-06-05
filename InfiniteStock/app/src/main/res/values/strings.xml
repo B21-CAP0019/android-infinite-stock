@@ -67,4 +67,6 @@
     <string name="prediction_header_column">Prediction</string>
     <string name="product_name">Infinite Stock</string>
     <string name="logout">Logout</string>
+    <string name="tagline">a Bangkit Cahaya Asia\'s Capstone Project</string>
+    <string name="loading">Loading</string>
 </resources>
