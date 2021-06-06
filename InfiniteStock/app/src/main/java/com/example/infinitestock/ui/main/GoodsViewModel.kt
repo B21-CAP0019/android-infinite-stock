@@ -17,7 +17,7 @@ class GoodsViewModel: ViewModel() {
     private val warehouseResponse = MutableLiveData<WarehouseResponse>()
 
     fun retrieveGoods(context: Context, account: Account?) {
-        val url = context.resources.getString(R.string.server) + "/warehouse/get/goods/all"
+        val url = context.resources.getString(R.string.server) + "/warehouse/goods/get/all"
         val client = AsyncHttpClient()
 
         client.addHeader("x-access-publicid", account?.publicId)

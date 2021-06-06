@@ -37,14 +37,14 @@ class AddGoodsActivity : AppCompatActivity() {
         val goodsQuantity = binding.valueGoodsQuantity.text.toString()
         val goodsUnit = binding.valueGoodsUnit.text.toString()
 
-        val url = resources.getString(R.string.server) + "/warehouse/create/goods"
+        val url = resources.getString(R.string.server) + "/warehouse/goods/create"
         val client = AsyncHttpClient()
 
         val params = RequestParams()
-        params.put("name", goodsName)
-        params.put("price", goodsPrice)
-        params.put("quantity", goodsQuantity)
-        params.put("unit", goodsUnit)
+        params.put("goods_name", goodsName)
+        params.put("goods_quantity", goodsQuantity)
+        params.put("goods_unit", goodsUnit)
+        params.put("goods_price", goodsPrice)
 
         client.post(url, params, object: AsyncHttpResponseHandler() {
             override fun onSuccess(

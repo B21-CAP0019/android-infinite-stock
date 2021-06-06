@@ -77,8 +77,8 @@ class LoginActivity : AppCompatActivity() {
 
                     val accountData = response.getJSONObject("data")
                     val account = Account(
-                        fullName = accountData.getString("full_name"),
                         publicId = accountData.getString("public_id"),
+                        fullName = accountData.getString("full_name"),
                         shopName = accountData.getString("shop_name")
                     )
 
