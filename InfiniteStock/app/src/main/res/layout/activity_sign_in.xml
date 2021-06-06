@@ -70,7 +70,7 @@
         android:layout_alignParentEnd="true"
         android:visibility="gone"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="cube-loading.json"
+        app:lottie_rawRes="@raw/loading"
         app:lottie_loop="true" />
     <ImageButton
         android:id="@+id/btn_signin"

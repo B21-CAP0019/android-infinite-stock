@@ -44,7 +44,12 @@ class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
                 goodsUnit.text = good.goodsUnit
 
                 root.setOnClickListener {
-                    // action after user clicked the items!
+                    // TODO: action after user clicked the items! Directly to update items?
+                }
+
+                root.setOnLongClickListener {
+                    // TODO: action after the user holds the item! Maybe delete the item?
+                    return@setOnLongClickListener true // don't delete this line.
                 }
             }
         }

@@ -70,4 +70,7 @@
     <string name="tagline">a Bangkit Cahaya Asia\'s Capstone Project</string>
     <string name="loading">Loading</string>
     <string name="number" />
+    <string name="empty_data">You haven\'t store any goods here</string>
+    <string name="error">Oops, we have a trouble. We\'ll be back as soon as possible</string>
+    <string name="refresh">Refresh</string>
 </resources>

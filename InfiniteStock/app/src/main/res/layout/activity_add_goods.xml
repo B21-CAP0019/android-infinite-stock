@@ -79,7 +79,7 @@
         >
         <EditText
             android:id="@+id/indonesian_valuta"
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_marginStart="27dp"
             android:layout_marginTop="10dp"
