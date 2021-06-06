@@ -96,11 +96,11 @@
                     android:layout_width="55dp"
                     android:layout_height="50dp"
                     android:textSize="25sp"
-                    android:text="20"
+                    android:text="@string/number"
                     android:inputType="number"
                     android:layout_marginTop="8dp"
                     android:paddingHorizontal="12dp"
-                    tools:ignore="Autofill" />
+                    tools:ignore="Autofill,LabelFor" />
                 <Button
                     android:id="@+id/btn_increase_update"
                     android:layout_width="50dp"

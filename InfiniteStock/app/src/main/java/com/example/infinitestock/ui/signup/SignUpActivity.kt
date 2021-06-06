@@ -22,6 +22,7 @@ class SignUpActivity : AppCompatActivity() {
             .into(binding.logoSignup)
 
         binding.btnSignup.setOnClickListener {
+            // kirim data ke server
             val intentToLoginActivity = Intent(this@SignUpActivity, MainActivity::class.java)
             startActivity(intentToLoginActivity)
         }

@@ -1,5 +1,6 @@
 package com.example.infinitestock
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class ListItemAdapter(private val listItem: ArrayList<StockItem>): RecyclerView.
         return listItem.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         with(holder){
             with(listItem[position]){
