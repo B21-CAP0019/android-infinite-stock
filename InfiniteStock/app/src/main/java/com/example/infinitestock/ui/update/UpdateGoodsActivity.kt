@@ -40,7 +40,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
         supportActionBar?.title = " ${ resources.getString(R.string.header_update_goods) }"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.progressBar.visibility = View.VISIBLE
+        binding.animationLoading.visibility = View.VISIBLE
         // put the last saved value
         good = intent.getParcelableExtra<Good>(EXTRA_GOOD) as Good
         binding.valueUpdateGoodsName.setText(good.goodsName)
@@ -54,8 +54,24 @@ class UpdateGoodsActivity : AppCompatActivity() {
         binding.btnPredictGoods.setOnClickListener {
             predictGoodsClick(good.goodsId)
         }
+        binding.btnIncreaseUpdate.setOnClickListener {
+            increaseUpdateClick()
+        }
+        binding.btnDecreaseUpdate.setOnClickListener {
+            decreaseUpdateClick()
+        }
 
-        binding.progressBar.visibility = View.INVISIBLE
+        binding.animationLoading.visibility = View.INVISIBLE
+    }
+
+    private fun decreaseUpdateClick() {
+        good.goodsQuantity = good.goodsQuantity?.minus(1)
+        good.goodsQuantity?.let { binding.valueUpdateGoodsStock.setText(it.toString()) }
+    }
+
+    private fun increaseUpdateClick() {
+        good.goodsQuantity = good.goodsQuantity?.plus(1)
+        good.goodsQuantity?.let { binding.valueUpdateGoodsStock.setText(it.toString()) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -84,6 +100,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
                 responseBody: ByteArray?
             ) {
                 binding.animationLoading.visibility = View.INVISIBLE
+                binding.headerPrediction.visibility = View.VISIBLE
                 // parsing JSON
                 if (responseBody != null) {
                     val result = String(responseBody)
@@ -129,7 +146,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
     }
 
     private fun updateGoodsClick() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.animationLoading.visibility = View.VISIBLE
 
         val goodsName = binding.valueUpdateGoodsName.text.toString()
         val goodsPrice = binding.valueUpdateGoodsPrice.text.toString()
@@ -155,7 +172,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
                 headers: Array<out Header>?,
                 responseBody: ByteArray?
             ) {
-                binding.progressBar.visibility = View.INVISIBLE
+                binding.animationLoading.visibility = View.INVISIBLE
                 val intentToMainActivity = Intent(this@UpdateGoodsActivity, MainActivity::class.java)
                 startActivity(intentToMainActivity)
             }
@@ -166,7 +183,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                binding.progressBar.visibility = View.INVISIBLE
+                binding.animationLoading.visibility = View.INVISIBLE
                 Toast.makeText(this@UpdateGoodsActivity, "ErrorCode: $statusCode", Toast.LENGTH_SHORT).show()
             }
 
