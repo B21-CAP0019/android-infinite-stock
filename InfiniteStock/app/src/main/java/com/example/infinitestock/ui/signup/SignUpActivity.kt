@@ -38,7 +38,7 @@ class SignUpActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
-        binding.valueConfirmationPassword.setOnEditorActionListener { v, actionId, event ->
+        binding.valueConfirmationPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val inputMethodManager =
                     getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
