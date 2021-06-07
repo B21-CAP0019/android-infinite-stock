@@ -19,7 +19,7 @@ class EntryStockViewModel : ViewModel() {
     private var items = arrayListOf<ReportItem>()
     // var tempString: String = ""
 
-    fun retrieveEntryReport(context: Context, async: Boolean = true) {
+    fun retrieveEntryReport(context: Context, async: Boolean = true): ArrayList<ReportItem> {
         try {
             Looper.prepare()
         } catch (ignored: Exception) {
@@ -55,8 +55,8 @@ class EntryStockViewModel : ViewModel() {
                                 ReportItem(
                                     dateTime = data.getJSONObject(i).getString("datetime"),
                                     name = data.getJSONObject(i).getString("goods_name"),
-                                    qty = data.getJSONObject(i).getDouble("quantity").toString(),
-                                    unit = data.getJSONObject(i).getString("good_unit")
+                                    qty = data.getJSONObject(i).getDouble("goods_quantity").toString(),
+                                    unit = data.getJSONObject(i).getString("goods_unit")
                                 )
                             )
                         }
@@ -73,6 +73,7 @@ class EntryStockViewModel : ViewModel() {
                 Log.d("EntryStockViewModel", "errorCode $statusCode")
             }
         })
+        return items
     }
 
     fun getItems(): ArrayList<ReportItem> {

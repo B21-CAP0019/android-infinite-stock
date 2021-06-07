@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.infinitestock.data.entity.PredictStock
 import com.example.infinitestock.data.entity.ReportItem
 import com.example.infinitestock.databinding.FragmentEntryStockBinding
-import com.example.infinitestock.ui.update.PredictsAdapter
+import com.example.infinitestock.ui.stock.HistoryAdapter
 
 class EntryStockFragment : Fragment() {
 
@@ -38,13 +37,15 @@ class EntryStockFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.let { viewModel.retrieveEntryReport(it.baseContext, true) }
-        showRecyclerList(viewModel.getItems())
+        binding.animationLoading.visibility = View.VISIBLE
+        showRecyclerList(requireActivity().let { viewModel.retrieveEntryReport(it.baseContext, async = true) })
     }
 
     private fun showRecyclerList(list: ArrayList<ReportItem>) {
-        binding.entryList.layoutManager = LinearLayoutManager(this)
-        val predictsAdapter = PredictsAdapter(list)
-        binding.entryList.adapter = predictsAdapter
+        binding.entryList.layoutManager = LinearLayoutManager(activity?.baseContext)
+        val historyAdapter = HistoryAdapter(list)
+        binding.entryList.adapter = historyAdapter
+
+        binding.animationLoading.visibility = View.INVISIBLE
     }
 }

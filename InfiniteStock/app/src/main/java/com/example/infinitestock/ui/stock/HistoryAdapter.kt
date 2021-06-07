@@ -5,33 +5,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.R
-import com.example.infinitestock.data.entity.PredictStock
-import com.example.infinitestock.databinding.RowItemTableBinding
-import com.example.infinitestock.ui.update.PredictsAdapter
+import com.example.infinitestock.data.entity.ReportItem
+import com.example.infinitestock.databinding.CardHistoryBinding
 
-class HistoryAdapter(private val historyItems: ArrayList<PredictStock>): RecyclerView.Adapter<PredictsAdapter.PredictsViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredictsViewHolder {
+class HistoryAdapter(private val historyItems: ArrayList<ReportItem>): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.row_item_table, parent, false)
+            .inflate(R.layout.card_history, parent, false)
 
-        return PredictsViewHolder(view)
+        return HistoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PredictsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.bind(historyItems[position])
     }
 
     override fun getItemCount(): Int = historyItems.size
 
-    inner class PredictsViewHolder(itemView: View) :
+    inner class HistoryViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        private val binding = RowItemTableBinding.bind(itemView)
+        private val binding = CardHistoryBinding.bind(itemView)
 
-        fun bind(prediction: PredictStock) {
+        fun bind(reportItem: ReportItem) {
             with (binding) {
-                valueDateTable.text = prediction.date
-                valuePrediction.text = prediction.qty
+                historyDate.text = reportItem.dateTime
+                historyName.text = reportItem.name
+                historyQuantity.text = reportItem.qty
+                historyUnit.text =reportItem.unit
             }
         }
     }

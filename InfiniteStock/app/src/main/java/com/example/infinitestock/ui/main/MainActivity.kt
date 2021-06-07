@@ -27,6 +27,7 @@ import com.example.infinitestock.data.entity.WarehouseResponse
 import com.example.infinitestock.databinding.ActivityMainBinding
 import com.example.infinitestock.ui.add.AddGoodsActivity
 import com.example.infinitestock.ui.login.LoginActivity
+import com.example.infinitestock.ui.stock.HistoryActivity
 import com.example.infinitestock.ui.update.UpdateGoodsActivity
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
