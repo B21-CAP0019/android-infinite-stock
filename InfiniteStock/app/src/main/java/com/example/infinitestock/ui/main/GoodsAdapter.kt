@@ -51,7 +51,7 @@ class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
                 goodsName.text = good.goodsName
 
                 val numberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
-                goodsPrice.text = numberFormat.format(good.goodsPrice)
+                goodsPrice.text = numberFormat.format(good.goodsPrice).trim()
 
                 goodsQuantity.text = good.goodsQuantity?.let { formatDecimal(it) }
                 goodsUnit.text = good.goodsUnit
@@ -72,9 +72,9 @@ class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
         private fun formatDecimal(number: Double): String {
             val epsilon = 0.004f
             return if (abs(number.roundToInt() - number) < epsilon) {
-                String.format("%10.0f", number)
+                String.format("%.0f", number)
             } else {
-                String.format("%10.2f", number)
+                String.format("%.2f", number)
             }
         }
     }

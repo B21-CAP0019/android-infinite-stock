@@ -21,38 +21,40 @@
             android:text="Masako"
             android:textStyle="bold"
             android:textColor="?android:textColorPrimary"
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="3dp"/>
+            android:layout_marginTop="3dp"/>
+
         <RelativeLayout
             android:id="@+id/qty_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/goods_name"
-            >
+            android:layout_alignParentStart="true">
+
             <TextView
                 android:id="@+id/goods_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="40"
-                android:layout_marginStart="3dp"/>
+                android:text="40000000"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/goods_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:layout_marginStart="5dp"
                 android:layout_toEndOf="@+id/goods_quantity"
                 android:text="Pcs"
-                android:layout_marginStart="5dp"/>
+                android:textSize="16sp" />
         </RelativeLayout>
+
         <TextView
             android:id="@+id/goods_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/qty_unit"
-            android:textSize="16sp"
-            android:layout_marginStart="3dp"
-            android:text="Rp50000"/>
+            android:layout_alignParentStart="true"
+            android:text="Rp50000"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
