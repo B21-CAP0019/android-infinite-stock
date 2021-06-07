@@ -63,6 +63,11 @@ class SignUpActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
     private fun onSignInActionPerformed() {
         with (binding) {
             val email = valueSignupEmail.text.toString()
@@ -78,7 +83,6 @@ class SignUpActivity : AppCompatActivity() {
                 switchLoading()
             } else {
                 if (password == confirmPassword) {
-                    // kirim data ke server
                     val url = resources.getString(R.string.server) + "/auth/signup"
                     val client = AsyncHttpClient()
 
@@ -115,7 +119,6 @@ class SignUpActivity : AppCompatActivity() {
                             responseBody: ByteArray,
                             error: Throwable?
                         ) {
-                            // TODO: If the registration process turns failure code
                             switchLoading()
 
                             val result = String(responseBody)

@@ -3,38 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_color">
     <include
         android:id="@+id/appbar_add_goods"
         layout="@layout/custom_appbar"/>
-    <TextView
-        android:id="@+id/header_add_goods"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/header_add_goods"
-        android:layout_below="@+id/appbar_add_goods"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="40dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black"/>
     <EditText
         android:id="@+id/value_goods_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/header_add_goods"
+        android:layout_below="@+id/appbar_add_goods"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/input_background"
         android:hint="@string/hint_goods_name"
         android:textSize="16sp"
-        android:inputType="textEmailAddress"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill"
+        android:inputType="text" />
     <RelativeLayout
         android:id="@+id/container_qty_unit"
         android:layout_width="wrap_content"
@@ -51,7 +39,7 @@
             android:background="@drawable/input_background"
             android:hint="@string/hint_goods_quantity"
             android:textSize="16sp"
-            android:inputType="textEmailAddress"
+            android:inputType="numberDecimal"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             tools:ignore="Autofill"/>
@@ -66,10 +54,10 @@
             android:background="@drawable/input_background"
             android:hint="@string/hint_goods_unit"
             android:textSize="16sp"
-            android:inputType="textEmailAddress"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
-            tools:ignore="Autofill"/>
+            tools:ignore="Autofill"
+            android:inputType="text" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/container_price"
@@ -79,7 +67,7 @@
         >
         <EditText
             android:id="@+id/indonesian_valuta"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="27dp"
             android:layout_marginTop="10dp"
@@ -88,7 +76,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:inputType="textEmailAddress"
-            android:paddingHorizontal="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="1dp"
             android:paddingVertical="10dp"
             android:enabled="false"
             tools:ignore="Autofill"/>
@@ -102,7 +91,7 @@
             android:background="@drawable/right_special_box"
             android:hint="@string/hint_goods_price"
             android:textSize="16sp"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             tools:ignore="Autofill"/>
@@ -117,4 +106,15 @@
         android:background="@drawable/round_btn"
         android:src="@drawable/ic_check"
         tools:ignore="ContentDescription" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/appbar_add_goods"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_loop="true" />
 </RelativeLayout>

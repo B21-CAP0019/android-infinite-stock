@@ -57,6 +57,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
     private fun onSignInClick() {
         switchLoading()
         val email = binding.valueSigninEmail.text.toString()

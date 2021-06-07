@@ -134,4 +134,9 @@ class SplashScreenActivity : AppCompatActivity() {
             }
         }, 3000)
     }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 }
