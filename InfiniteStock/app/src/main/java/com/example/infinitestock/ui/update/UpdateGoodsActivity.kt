@@ -1,34 +1,39 @@
 package com.example.infinitestock.ui.update
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.R
 import com.example.infinitestock.data.SessionCompat
+import com.example.infinitestock.data.entity.Account
 import com.example.infinitestock.data.entity.Good
+import com.example.infinitestock.data.entity.PredictStock
 import com.example.infinitestock.databinding.ActivityUpdateGoodsBinding
 import com.example.infinitestock.ui.main.MainActivity
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
 import cz.msebera.android.httpclient.Header
+import org.json.JSONArray
+import org.json.JSONObject
 
 class UpdateGoodsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUpdateGoodsBinding
     private lateinit var good: Good
+    private lateinit var account: Account
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateGoodsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        account = SessionCompat(this).getAccount()
 
         // toolbar
         setSupportActionBar(binding.appbarUpdateGoods.toolbar)
@@ -47,7 +52,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
             updateGoodsClick()
         }
         binding.btnPredictGoods.setOnClickListener {
-            predictGoodsClick()
+            predictGoodsClick(good.goodsId)
         }
 
         binding.progressBar.visibility = View.INVISIBLE
@@ -58,8 +63,69 @@ class UpdateGoodsActivity : AppCompatActivity() {
         return true
     }
 
-    private fun predictGoodsClick() {
-        TODO("Not yet implemented")
+    private fun showRecyclerList(list: ArrayList<PredictStock>) {
+        binding.recyclerviewPredict.layoutManager = LinearLayoutManager(this)
+        val predictsAdapter = PredictsAdapter(list)
+        binding.recyclerviewPredict.adapter = predictsAdapter
+    }
+
+    private fun predictGoodsClick(id: Int) {
+        binding.animationLoading.visibility = View.VISIBLE
+        // query
+        val url = resources.getString(R.string.server) + "/warehouse/goods/demand/predict/$id"
+        val client = AsyncHttpClient()
+        val params = RequestParams()
+        params.put("public_id", account.publicId)
+
+        client.get(url, params, object: AsyncHttpResponseHandler() {
+            override fun onSuccess(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?
+            ) {
+                binding.animationLoading.visibility = View.INVISIBLE
+                // parsing JSON
+                if (responseBody != null) {
+                    val result = String(responseBody)
+                    val response = JSONObject(result)
+
+                    Log.d("API", result)
+
+                    // Parse response to WarehouseResponse
+                    //val message = response.getString("message")
+                    val data = response.getJSONArray("data")
+                    //val dataPerDay = data.get("day")
+
+                    val predictsItem = ArrayList<PredictStock>()
+                    if (data is JSONArray) {
+                        for (i in 0 until data.length()) {
+                            predictsItem.add(
+                                PredictStock(
+                                    date = data.getJSONObject(i).getString("date"),
+                                    qty = data.getJSONObject(i).getString("prediction")
+                                )
+                            )
+                        }
+                    }
+                    // put on the recyclerView
+                    showRecyclerList(predictsItem)
+                }
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?,
+                error: Throwable?
+            ) {
+                binding.animationLoading.visibility = View.INVISIBLE
+                Toast.makeText(
+                    this@UpdateGoodsActivity,
+                    "ErrorCode: $statusCode",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 
     private fun updateGoodsClick() {
@@ -73,8 +139,6 @@ class UpdateGoodsActivity : AppCompatActivity() {
 
         val url = resources.getString(R.string.server) + "/warehouse/goods/update"
         val client = AsyncHttpClient()
-
-        val account = SessionCompat(this).getAccount()
 
         val params = RequestParams()
 
