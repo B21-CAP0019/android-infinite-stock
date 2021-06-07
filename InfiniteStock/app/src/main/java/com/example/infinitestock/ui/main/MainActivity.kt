@@ -279,6 +279,11 @@ class MainActivity : AppCompatActivity() {
             .create().show()
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
     private fun applyWarehouseResponse(response: WarehouseResponse) {
         if (response.status == 200) {
             binding.customLoading.animationLoad.visibility = View.GONE

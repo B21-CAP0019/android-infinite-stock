@@ -63,6 +63,11 @@ class SignUpActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
     private fun onSignInActionPerformed() {
         with (binding) {
             val email = valueSignupEmail.text.toString()

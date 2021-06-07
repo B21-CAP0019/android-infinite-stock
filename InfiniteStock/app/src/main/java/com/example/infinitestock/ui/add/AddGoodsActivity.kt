@@ -2,6 +2,7 @@ package com.example.infinitestock.ui.add
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,15 +30,28 @@ class AddGoodsActivity : AppCompatActivity() {
 
             // toolbar
             setSupportActionBar(appbarAddGoods.toolbar)
-            supportActionBar?.title = resources.getString(R.string.app_name)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title = resources.getString(R.string.header_add_goods)
 
             btnToOkayAddGoods.setOnClickListener {
-                createGoodsClick()
+                onAddNewItemPerformed()
             }
         }
     }
 
-    private fun createGoodsClick() {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) super.onBackPressed()
+        return true
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
+    private fun onAddNewItemPerformed() {
+        switchLoading()
+
         with(binding) {
             val goodsName = valueGoodsName.text.toString()
             val goodsPrice = valueGoodsPrice.text.toString()
@@ -52,9 +66,6 @@ class AddGoodsActivity : AppCompatActivity() {
                 ).show()
                 switchLoading()
             } else {
-
-
-                // kirim data
                 val url = resources.getString(R.string.server) + "/warehouse/goods/create"
                 val client = AsyncHttpClient()
 
@@ -65,7 +76,6 @@ class AddGoodsActivity : AppCompatActivity() {
                 params.put("goods_price", goodsPrice)
                 params.put("goods_quantity", goodsQuantity)
                 params.put("goods_unit", goodsUnit)
-
 
                 client.post(url, params, object: AsyncHttpResponseHandler() {
                     override fun onSuccess(
@@ -81,10 +91,12 @@ class AddGoodsActivity : AppCompatActivity() {
                             val message = response.getString("message")
                             val status = response.getInt("status")
 
-                            Toast.makeText(this@AddGoodsActivity, message, Toast.LENGTH_SHORT)
-                                .show()
-
                             if (status == 1) {
+                                Toast.makeText(
+                                    this@AddGoodsActivity,
+                                    "Successfully added new item: $goodsName!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 finish()
                             }
                         }
@@ -115,29 +127,20 @@ class AddGoodsActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-
-
-
-
-
-
     private fun switchLoading() {
         with (binding) {
             if (!isLoading) {
                 btnToOkayAddGoods.visibility = View.GONE
                 valueGoodsName.visibility = View.GONE
-                valueGoodsQuantity.visibility = View.GONE
-                valueGoodsUnit.visibility = View.GONE
-                valueGoodsPrice.visibility = View.GONE
+                containerQtyUnit.visibility = View.GONE
+                containerPrice.visibility = View.GONE
+                loading.visibility = View.VISIBLE
             } else {
                 btnToOkayAddGoods.visibility = View.VISIBLE
                 valueGoodsName.visibility = View.VISIBLE
-                valueGoodsQuantity.visibility = View.VISIBLE
-                valueGoodsUnit.visibility = View.VISIBLE
-                valueGoodsPrice.visibility = View.VISIBLE
+                containerQtyUnit.visibility = View.VISIBLE
+                containerPrice.visibility = View.VISIBLE
+                loading.visibility = View.GONE
             }
             isLoading = !isLoading
         }
