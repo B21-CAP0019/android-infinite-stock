@@ -1,5 +1,6 @@
 package com.example.infinitestock.ui.main
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.R
 import com.example.infinitestock.data.entity.Good
 import com.example.infinitestock.databinding.CardGoodsBinding
+import com.example.infinitestock.ui.update.UpdateGoodsActivity
 
 class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
 
@@ -45,6 +47,9 @@ class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
 
                 root.setOnClickListener {
                     // TODO: action after user clicked the items! Directly to update items?
+                    val intentToUpdateGoodsActivity = Intent(binding.root.context, UpdateGoodsActivity::class.java)
+                    intentToUpdateGoodsActivity.putExtra(UpdateGoodsActivity.EXTRA_GOOD, good)
+                    binding.root.context.startActivity(intentToUpdateGoodsActivity)
                 }
 
                 root.setOnLongClickListener {
