@@ -1,6 +1,5 @@
 package com.example.infinitestock.ui.main
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.R
 import com.example.infinitestock.data.entity.Good
 import com.example.infinitestock.databinding.CardGoodsBinding
-import com.example.infinitestock.ui.update.UpdateGoodsActivity
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
 class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
 
     private val goods = ArrayList<Good>()
+    private var itemActionListener: OnItemActionListener? = null
+
+    fun setOnItemActionListener(listener: OnItemActionListener) {
+        this.itemActionListener = listener
+    }
 
     fun setGoodsValue(goods: ArrayList<Good>) {
         this.goods.clear()
@@ -41,22 +49,38 @@ class GoodsAdapter : RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
         fun bind(good: Good) {
             with (binding) {
                 goodsName.text = good.goodsName
-                goodsPrice.text = good.goodsPrice.toString()
-                goodsQuantity.text = good.goodsQuantity.toString()
+
+                val numberFormat = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+                goodsPrice.text = numberFormat.format(good.goodsPrice)
+
+                goodsQuantity.text = good.goodsQuantity?.let { formatDecimal(it) }
                 goodsUnit.text = good.goodsUnit
 
                 root.setOnClickListener {
-                    // TODO: action after user clicked the items! Directly to update items?
-                    val intentToUpdateGoodsActivity = Intent(binding.root.context, UpdateGoodsActivity::class.java)
-                    intentToUpdateGoodsActivity.putExtra(UpdateGoodsActivity.EXTRA_GOOD, good)
-                    binding.root.context.startActivity(intentToUpdateGoodsActivity)
+                    itemActionListener?.onItemClick(good)
                 }
 
                 root.setOnLongClickListener {
                     // TODO: action after the user holds the item! Maybe delete the item?
+                    itemActionListener?.onItemLongClick(good)
+
                     return@setOnLongClickListener true // don't delete this line.
                 }
             }
         }
+
+        private fun formatDecimal(number: Double): String {
+            val epsilon = 0.004f
+            return if (abs(number.roundToInt() - number) < epsilon) {
+                String.format("%10.0f", number)
+            } else {
+                String.format("%10.2f", number)
+            }
+        }
+    }
+
+    interface OnItemActionListener {
+        fun onItemClick(good: Good)
+        fun onItemLongClick(good: Good)
     }
 }

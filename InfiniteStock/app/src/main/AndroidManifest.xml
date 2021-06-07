@@ -4,6 +4,7 @@
     package="com.example.infinitestock">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfiniteStock"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.update.UpdateGoodsActivity"></activity>
+        <activity android:name=".ui.update.UpdateGoodsActivity" />
         <activity android:name=".ui.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
