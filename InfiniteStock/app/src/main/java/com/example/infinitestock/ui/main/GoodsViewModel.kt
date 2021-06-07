@@ -12,6 +12,7 @@ import com.example.infinitestock.data.entity.Good
 import com.example.infinitestock.data.entity.WarehouseResponse
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
+import com.loopj.android.http.RequestParams
 import com.loopj.android.http.SyncHttpClient
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
@@ -36,8 +37,10 @@ class GoodsViewModel: ViewModel() {
             goods = ArrayList()
         )
 
-        client.addHeader("x-access-publicid", account?.publicId)
-        client.get(url, object : AsyncHttpResponseHandler() {
+        val params = RequestParams()
+        params.put("public_id", account?.publicId)
+
+        client.get(url, params, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
@@ -58,11 +61,11 @@ class GoodsViewModel: ViewModel() {
                     val goods = ArrayList<Good>()
                     for (i in 0 until detailData.length()) {
                         goods.add(Good(
-                            goodsId = detailData.getJSONArray(i).getInt(0),
-                            goodsName = detailData.getJSONArray(i).getString(1),
-                            goodsQuantity = detailData.getJSONArray(i).getDouble(2),
-                            goodsUnit = detailData.getJSONArray(i).getString(3),
-                            goodsPrice = detailData.getJSONArray(i).getInt(4)
+                            goodsId = detailData.getJSONObject(i).getInt("goods_id"),
+                            goodsName = detailData.getJSONObject(i).getString("goods_name"),
+                            goodsQuantity = detailData.getJSONObject(i).getDouble("goods_quantity"),
+                            goodsUnit = detailData.getJSONObject(i).getString("goods_unit"),
+                            goodsPrice = detailData.getJSONObject(i).getInt("goods_price")
                         ))
                     }
 
