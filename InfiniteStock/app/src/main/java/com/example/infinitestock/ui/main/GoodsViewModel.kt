@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.infinitestock.R
-import com.example.infinitestock.data.entity.Account
+import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.data.entity.Good
 import com.example.infinitestock.data.entity.WarehouseResponse
 import com.loopj.android.http.AsyncHttpClient
@@ -22,11 +22,12 @@ class GoodsViewModel: ViewModel() {
 
     private val warehouse = MutableLiveData<WarehouseResponse>()
 
-    fun retrieveGoods(context: Context, account: Account?, async: Boolean = true) : WarehouseResponse {
+    fun retrieveGoods(context: Context, async: Boolean = true) : WarehouseResponse {
         try {
             Looper.prepare()
         } catch (ignored: Exception) {
         }
+        val account = SessionCompat(context).getAccount()
         val url = context.resources.getString(R.string.server) + "/warehouse/goods/get/all"
         val client = if (async) AsyncHttpClient() else SyncHttpClient()
 
@@ -38,7 +39,7 @@ class GoodsViewModel: ViewModel() {
         )
 
         val params = RequestParams()
-        params.put("public_id", account?.publicId)
+        params.put("public_id", account.publicId)
 
         client.get(url, params, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

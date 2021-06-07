@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     GoodsViewModel::class.java
             ]
             viewModel.loadGoods().observe(this@MainActivity, { applyWarehouseResponse(it) })
-            viewModel.retrieveGoods(this@MainActivity, account, true)
+            viewModel.retrieveGoods(this@MainActivity, true)
 
             btnToAddGoods.setOnClickListener {
                 val intentToAddGoodsActivity = Intent(this@MainActivity, AddGoodsActivity::class.java)
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     val deferredGoods = async(Dispatchers.IO) {
-                        viewModel.retrieveGoods(this@MainActivity, account, false)
+                        viewModel.retrieveGoods(this@MainActivity, false)
                     }
                     val warehouseResponse = deferredGoods.await()
                     applyWarehouseResponse(warehouseResponse)
