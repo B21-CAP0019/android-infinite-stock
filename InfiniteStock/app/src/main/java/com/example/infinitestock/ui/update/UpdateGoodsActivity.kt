@@ -3,6 +3,7 @@ package com.example.infinitestock.ui.update
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,24 +32,8 @@ class UpdateGoodsActivity : AppCompatActivity() {
 
         // toolbar
         setSupportActionBar(binding.appbarUpdateGoods.toolbar)
-        supportActionBar?.title = " ${ resources.getString(R.string.app_name) }"
-        supportActionBar?.setDisplayUseLogoEnabled(true)
-        Glide.with(this@UpdateGoodsActivity)
-            .asDrawable()
-            .load(R.drawable.logo)
-            .override(80, 80)
-            .into(object: CustomTarget<Drawable>() {
-                override fun onResourceReady(
-                    resource: Drawable,
-                    transition: Transition<in Drawable>?
-                ) {
-                    supportActionBar?.setLogo(resource)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    /* no-op */
-                }
-            })
+        supportActionBar?.title = " ${ resources.getString(R.string.header_update_goods) }"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.progressBar.visibility = View.VISIBLE
         // put the last saved value
@@ -66,6 +51,11 @@ class UpdateGoodsActivity : AppCompatActivity() {
         }
 
         binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) super.onBackPressed()
+        return true
     }
 
     private fun predictGoodsClick() {
@@ -120,6 +110,6 @@ class UpdateGoodsActivity : AppCompatActivity() {
     }
 
     companion object{
-        val EXTRA_GOOD = "ekstra_good"
+        const val EXTRA_GOOD = "extra_good"
     }
 }

@@ -1,8 +1,12 @@
 package com.example.infinitestock.ui.signup
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -30,10 +34,33 @@ class SignUpActivity : AppCompatActivity() {
             .load(R.drawable.logo)
             .into(binding.logoSignup)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
+
+        binding.valueConfirmationPassword.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val inputMethodManager =
+                    getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(
+                    binding.valueConfirmationPassword.windowToken, 0
+                )
+
+                switchLoading()
+                onSignInActionPerformed()
+            }
+            return@setOnEditorActionListener true
+        }
+
         binding.btnSignup.setOnClickListener {
             switchLoading()
             onSignInActionPerformed()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) super.onBackPressed()
+        return true
     }
 
     private fun onSignInActionPerformed() {
@@ -89,16 +116,25 @@ class SignUpActivity : AppCompatActivity() {
                             error: Throwable?
                         ) {
                             // TODO: If the registration process turns failure code
+                            switchLoading()
+
                             val result = String(responseBody)
                             Log.d("API Error", result)
                             val response = JSONObject(result)
 
-                            Toast.makeText(
-                                this@SignUpActivity,
-                                "[${ statusCode }]: ${ response.getString("message") } (${ error?.message.toString() })",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            switchLoading()
+                            if (statusCode == 403) {
+                                Toast.makeText(
+                                    this@SignUpActivity,
+                                    response.getString("message"),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    this@SignUpActivity,
+                                    "[${ statusCode }]: ${ response.getString("message") } (${ error?.message.toString() })",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
 
                     })
