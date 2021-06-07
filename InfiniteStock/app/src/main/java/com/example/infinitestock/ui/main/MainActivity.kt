@@ -120,6 +120,10 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_refresh -> {
                 refreshGood()
             }
+            R.id.menu_history -> {
+                val intentToHistory = Intent(this, HistoryActivity::class.java)
+                startActivity(intentToHistory)
+            }
             R.id.menu_logout -> {
                 AlertDialog.Builder(this)
                     .setTitle("Are you sure?")

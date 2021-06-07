@@ -74,4 +74,5 @@
     <string name="error">Oops, we have a trouble. We\'ll be back as soon as possible</string>
     <string name="refresh">Refresh</string>
     <string name="delete_good">Deleting</string>
+    <string name="history">History</string>
 </resources>
