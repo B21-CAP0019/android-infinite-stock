@@ -3,10 +3,13 @@ package com.example.infinitestock.ui.stock.entrystock
 import android.content.Context
 import android.os.Looper
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.infinitestock.R
 import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.data.entity.ReportItem
+import com.example.infinitestock.data.entity.ReportResponse
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -16,14 +19,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class EntryStockViewModel : ViewModel() {
-    private var items = arrayListOf<ReportItem>()
+    private var reportItems = MutableLiveData<ReportResponse>()
     // var tempString: String = ""
 
-    fun retrieveEntryReport(context: Context, async: Boolean = true): ArrayList<ReportItem> {
+    fun retrieveEntryReport(context: Context, async: Boolean = true): ReportResponse {
         try {
             Looper.prepare()
         } catch (ignored: Exception) {
         }
+        var reportResponse = ReportResponse()
 
         val account = SessionCompat(context).getAccount()
         val url = context.resources.getString(R.string.server) + "/warehouse/goods/report/goodsin"
@@ -39,7 +43,7 @@ class EntryStockViewModel : ViewModel() {
                 responseBody: ByteArray
             ) {
                 // Parsing JSON
-                if (responseBody != null) {
+                if (statusCode == 200) {
                     val result = String(responseBody)
                     val response = JSONObject(result)
 
@@ -48,7 +52,7 @@ class EntryStockViewModel : ViewModel() {
                     // Parse response to WarehouseResponse
                     val data = response.getJSONArray("data")
 
-                    // val reportItem = ArrayList<ReportItem>()
+                    val items = ArrayList<ReportItem>()
                     if (data is JSONArray) {
                         for (i in 0 until data.length()) {
                             items.add(
@@ -60,6 +64,20 @@ class EntryStockViewModel : ViewModel() {
                                 )
                             )
                         }
+
+                        reportResponse = ReportResponse(
+                            status = statusCode,
+                            message = "",
+                            totalData = 0,
+                            reportItems = items
+                        )
+                    } else {
+                        reportResponse = ReportResponse(
+                            status = statusCode,
+                            message = "",
+                            totalData = 0,
+                            reportItems = ArrayList()
+                        )
                     }
                 }
             }
@@ -71,14 +89,18 @@ class EntryStockViewModel : ViewModel() {
                 error: Throwable?
             ) {
                 Log.d("EntryStockViewModel", "errorCode $statusCode")
+                reportResponse = ReportResponse(
+                    status = statusCode,
+                    message = "",
+                    totalData = 0,
+                    reportItems = ArrayList()
+                )
             }
         })
-        return items
+        return reportResponse
     }
 
-    fun getItems(): ArrayList<ReportItem> {
-        return items
-    }
+    fun getItems(): LiveData<ReportResponse> = reportItems
 
     /*
     fun getAllItems(): ArrayList<StockItem> {
