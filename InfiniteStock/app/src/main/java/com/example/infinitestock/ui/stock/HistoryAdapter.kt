@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.update
+package com.example.infinitestock.ui.stock
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.R
 import com.example.infinitestock.data.entity.PredictStock
 import com.example.infinitestock.databinding.RowItemTableBinding
+import com.example.infinitestock.ui.update.PredictsAdapter
 
-class PredictsAdapter(private val predictions: ArrayList<PredictStock>): RecyclerView.Adapter<PredictsAdapter.PredictsViewHolder>() {
-
+class HistoryAdapter(private val historyItems: ArrayList<PredictStock>): RecyclerView.Adapter<PredictsAdapter.PredictsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredictsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_item_table, parent, false)
@@ -18,10 +18,10 @@ class PredictsAdapter(private val predictions: ArrayList<PredictStock>): Recycle
     }
 
     override fun onBindViewHolder(holder: PredictsViewHolder, position: Int) {
-        holder.bind(predictions[position])
+        holder.bind(historyItems[position])
     }
 
-    override fun getItemCount(): Int = predictions.size
+    override fun getItemCount(): Int = historyItems.size
 
     inner class PredictsViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {

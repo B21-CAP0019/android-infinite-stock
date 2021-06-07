@@ -12,8 +12,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="search_hint">Search</string>
-    <string name="tab_text_1">Mengeluarkan Barang</string>
-    <string name="tab_text_2">Memasukkan Barang</string>
+    <string name="tab_text_1">Entry</string>
+    <string name="tab_text_2">Exit</string>
     <string name="nama_produk">Nama Produk</string>
     <string name="zero_number">0</string>
     <!-- TODO: Remove or change this placeholder text -->

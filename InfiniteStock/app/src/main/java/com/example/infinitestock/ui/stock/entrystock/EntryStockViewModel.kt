@@ -1,12 +1,85 @@
 package com.example.infinitestock.ui.stock.entrystock
 
+import android.content.Context
+import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.infinitestock.data.entity.StockItem
+import com.example.infinitestock.R
+import com.example.infinitestock.data.SessionCompat
+import com.example.infinitestock.data.entity.ReportItem
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import com.loopj.android.http.RequestParams
+import com.loopj.android.http.SyncHttpClient
+import cz.msebera.android.httpclient.Header
+import org.json.JSONArray
+import org.json.JSONObject
 
 class EntryStockViewModel : ViewModel() {
-    private var items = arrayListOf<StockItem>()
-    var tempString: String = ""
+    private var items = arrayListOf<ReportItem>()
+    // var tempString: String = ""
 
+    fun retrieveEntryReport(context: Context, async: Boolean = true) {
+        try {
+            Looper.prepare()
+        } catch (ignored: Exception) {
+        }
+
+        val account = SessionCompat(context).getAccount()
+        val url = context.resources.getString(R.string.server) + "/warehouse/goods/report/goodsin"
+        val client = if (async) AsyncHttpClient() else SyncHttpClient()
+
+        val params = RequestParams()
+        params.put("public_id", account.publicId)
+
+        client.get(url, params, object : AsyncHttpResponseHandler() {
+            override fun onSuccess(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray
+            ) {
+                // Parsing JSON
+                if (responseBody != null) {
+                    val result = String(responseBody)
+                    val response = JSONObject(result)
+
+                    Log.d("API", result)
+
+                    // Parse response to WarehouseResponse
+                    val data = response.getJSONArray("data")
+
+                    // val reportItem = ArrayList<ReportItem>()
+                    if (data is JSONArray) {
+                        for (i in 0 until data.length()) {
+                            items.add(
+                                ReportItem(
+                                    dateTime = data.getJSONObject(i).getString("datetime"),
+                                    name = data.getJSONObject(i).getString("goods_name"),
+                                    qty = data.getJSONObject(i).getDouble("quantity").toString(),
+                                    unit = data.getJSONObject(i).getString("good_unit")
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray,
+                error: Throwable?
+            ) {
+                Log.d("EntryStockViewModel", "errorCode $statusCode")
+            }
+        })
+    }
+
+    fun getItems(): ArrayList<ReportItem> {
+        return items
+    }
+
+    /*
     fun getAllItems(): ArrayList<StockItem> {
         return items
     }
@@ -52,4 +125,5 @@ class EntryStockViewModel : ViewModel() {
         }
         return -1
     }
+    */
 }
