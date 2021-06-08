@@ -88,7 +88,6 @@ class AddGoodsActivity : AppCompatActivity() {
                             val result = String(responseBody)
                             val response = JSONObject(result)
 
-                            val message = response.getString("message")
                             val status = response.getInt("status")
 
                             if (status == 1) {

@@ -14,6 +14,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.infinitestock.R
@@ -22,6 +25,7 @@ import com.example.infinitestock.data.entity.Account
 import com.example.infinitestock.data.entity.Good
 import com.example.infinitestock.data.entity.WarehouseResponse
 import com.example.infinitestock.databinding.ActivityMainBinding
+import com.example.infinitestock.ui.add.AddGoodsActivity
 import com.example.infinitestock.ui.login.LoginActivity
 import com.example.infinitestock.ui.stock.history.HistoryActivity
 import com.example.infinitestock.ui.update.UpdateGoodsActivity
