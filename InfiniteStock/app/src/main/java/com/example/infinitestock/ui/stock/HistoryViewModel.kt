@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.stock.exitstock
+package com.example.infinitestock.ui.stock
 
 import android.content.Context
 import android.os.Looper
@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.example.infinitestock.R
 import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.data.entity.ReportItem
-import com.example.infinitestock.data.entity.ReportResponse
+import com.example.infinitestock.data.entity.HistoryResponse
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -17,22 +17,28 @@ import com.loopj.android.http.SyncHttpClient
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
-class ExitStockViewModel : ViewModel() {
+class HistoryViewModel : ViewModel() {
 
-    private val liveReportResponse = MutableLiveData<ReportResponse>()
+    private val liveHistoryResponse = MutableLiveData<HistoryResponse>()
 
-    fun getReportResponse(): LiveData<ReportResponse> = liveReportResponse
+    fun getHistoryResponse(): LiveData<HistoryResponse> = liveHistoryResponse
 
-    fun retrieveResponses(context: Context, async: Boolean = true): ReportResponse {
+    fun retrieveResponses(context: Context,
+                          async: Boolean = true,
+                          isEntryStock: Boolean
+    ): HistoryResponse {
         try {
             Looper.prepare()
         } catch (e: Exception) {
             /* no-op */
         }
 
-        var reportResponse = ReportResponse()
+        var reportResponse = HistoryResponse()
         val account = SessionCompat(context).getAccount()
-        val url = context.resources.getString(R.string.server) + "/warehouse/goods/report/goodsout"
+        val url = context.resources.getString(R.string.server) +
+                    if (isEntryStock) "/warehouse/goods/report/goodsin"
+                    else "/warehouse/goods/report/goodsout"
+
         val client = if (async) AsyncHttpClient() else SyncHttpClient()
 
         val params = RequestParams()
@@ -64,21 +70,21 @@ class ExitStockViewModel : ViewModel() {
                             ))
                         }
                     }
-                    reportResponse = ReportResponse(
+                    reportResponse = HistoryResponse(
                         status = statusCode,
                         totalData = if (status == 1) data.length() else 0,
                         message = message,
                         reportItems = if (data.length() > 0) list else ArrayList()
                     )
-                    liveReportResponse.postValue(reportResponse)
+                    liveHistoryResponse.postValue(reportResponse)
                 } else {
-                    reportResponse = ReportResponse(
+                    reportResponse = HistoryResponse(
                         status = statusCode,
                         totalData = 0,
                         message = "Unknown response",
                         reportItems = ArrayList()
                     )
-                    liveReportResponse.postValue(reportResponse)
+                    liveHistoryResponse.postValue(reportResponse)
                 }
             }
 
@@ -94,13 +100,13 @@ class ExitStockViewModel : ViewModel() {
 
                     val message = response.getString("message")
 
-                    reportResponse = ReportResponse(
+                    reportResponse = HistoryResponse(
                         status = statusCode,
                         totalData = 0,
                         message = message,
                         reportItems = ArrayList()
                     )
-                    liveReportResponse.postValue(reportResponse)
+                    liveHistoryResponse.postValue(reportResponse)
                 }
             }
 

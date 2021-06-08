@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.example.infinitestock.R
 import com.example.infinitestock.data.SessionCompat
 import com.example.infinitestock.data.entity.ReportItem
-import com.example.infinitestock.data.entity.ReportResponse
+import com.example.infinitestock.data.entity.HistoryResponse
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -19,15 +19,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class EntryStockViewModel : ViewModel() {
-    private var reportItems = MutableLiveData<ReportResponse>()
+    private var reportItems = MutableLiveData<HistoryResponse>()
     // var tempString: String = ""
 
-    fun retrieveEntryReport(context: Context, async: Boolean = true): ReportResponse {
+    fun retrieveEntryReport(context: Context, async: Boolean = true): HistoryResponse {
         try {
             Looper.prepare()
         } catch (ignored: Exception) {
         }
-        var reportResponse = ReportResponse()
+        var reportResponse = HistoryResponse()
 
         val account = SessionCompat(context).getAccount()
         val url = context.resources.getString(R.string.server) + "/warehouse/goods/report/goodsin"
@@ -65,14 +65,14 @@ class EntryStockViewModel : ViewModel() {
                             )
                         }
 
-                        reportResponse = ReportResponse(
+                        reportResponse = HistoryResponse(
                             status = statusCode,
                             message = "",
                             totalData = 0,
                             reportItems = items
                         )
                     } else {
-                        reportResponse = ReportResponse(
+                        reportResponse = HistoryResponse(
                             status = statusCode,
                             message = "",
                             totalData = 0,
@@ -89,7 +89,7 @@ class EntryStockViewModel : ViewModel() {
                 error: Throwable?
             ) {
                 Log.d("EntryStockViewModel", "errorCode $statusCode")
-                reportResponse = ReportResponse(
+                reportResponse = HistoryResponse(
                     status = statusCode,
                     message = "",
                     totalData = 0,
@@ -100,7 +100,7 @@ class EntryStockViewModel : ViewModel() {
         return reportResponse
     }
 
-    fun getItems(): LiveData<ReportResponse> = reportItems
+    fun getItems(): LiveData<HistoryResponse> = reportItems
 
     /*
     fun getAllItems(): ArrayList<StockItem> {

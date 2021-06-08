@@ -10,9 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.R
-import com.example.infinitestock.data.entity.ReportResponse
+import com.example.infinitestock.data.entity.HistoryResponse
 import com.example.infinitestock.databinding.FragmentExitStockBinding
 import com.example.infinitestock.ui.stock.HistoryAdapter
+import com.example.infinitestock.ui.stock.HistoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -23,7 +24,7 @@ class ExitStockFragment : Fragment() {
     private var _binding: FragmentExitStockBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ExitStockViewModel
+    private lateinit var viewModel: HistoryViewModel
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
@@ -50,10 +51,10 @@ class ExitStockFragment : Fragment() {
             fabRefresh.visibility = View.GONE
 
             viewModel = ViewModelProvider(requireActivity())[
-                    ExitStockViewModel::class.java
+                    HistoryViewModel::class.java
             ]
-            viewModel.getReportResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
-            viewModel.retrieveResponses(requireContext(), async = true)
+            viewModel.getHistoryResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
+            viewModel.retrieveResponses(requireContext(), async = true, isEntryStock = false)
 
             fabRefresh.setOnClickListener {
                 refreshResponse()
@@ -93,14 +94,14 @@ class ExitStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), false)
+                viewModel.retrieveResponses(requireContext(), async = false, isEntryStock = false)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)
         }
     }
 
-    private fun applyReportResponse(response: ReportResponse) {
+    private fun applyReportResponse(response: HistoryResponse) {
         binding.fabRefresh.visibility = View.VISIBLE
         if (response.status == 200) {
             binding.customLoading.animationLoad.visibility = View.GONE
