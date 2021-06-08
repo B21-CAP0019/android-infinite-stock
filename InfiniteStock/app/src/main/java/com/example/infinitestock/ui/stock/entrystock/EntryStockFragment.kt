@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.data.entity.HistoryResponse
 import com.example.infinitestock.databinding.FragmentEntryStockBinding
-import com.example.infinitestock.ui.stock.HistoryAdapter
-import com.example.infinitestock.ui.stock.HistoryViewModel
+import com.example.infinitestock.ui.stock.history.HistoryAdapter
+import com.example.infinitestock.ui.stock.history.HistoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async

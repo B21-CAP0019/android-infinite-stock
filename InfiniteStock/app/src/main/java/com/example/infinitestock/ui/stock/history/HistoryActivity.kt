@@ -1,13 +1,12 @@
-package com.example.infinitestock.ui.stock
+package com.example.infinitestock.ui.stock.history
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
 import com.example.infinitestock.R
 import com.example.infinitestock.databinding.ActivityStockBinding
-import com.google.android.material.tabs.TabLayout
+import com.example.infinitestock.ui.stock.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HistoryActivity : AppCompatActivity() {

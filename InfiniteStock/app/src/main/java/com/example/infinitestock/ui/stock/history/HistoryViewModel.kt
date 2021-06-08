@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.stock
+package com.example.infinitestock.ui.stock.history
 
 import android.content.Context
 import android.os.Looper

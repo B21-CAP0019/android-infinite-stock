@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.stock.HistoryActivity"
+    tools:context=".ui.stock.history.HistoryActivity"
     android:background="@color/bg_color"
     android:id="@+id/main_stock_activity">
 

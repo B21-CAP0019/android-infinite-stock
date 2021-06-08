@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReportStockActivity" />
-        <activity android:name=".ui.stock.HistoryActivity" />
+        <activity android:name=".ui.stock.history.HistoryActivity" />
         <activity android:name=".ui.add.AddGoodsActivity" />
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.main.MainActivity" />
