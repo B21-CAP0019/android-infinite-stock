@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infinitestock.data.entity.HistoryResponse
 import com.example.infinitestock.databinding.FragmentEntryStockBinding
 import com.example.infinitestock.ui.stock.history.HistoryAdapter
-import com.example.infinitestock.ui.stock.history.HistoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -23,7 +22,7 @@ class EntryStockFragment : Fragment() {
     private var _binding: FragmentEntryStockBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: HistoryViewModel
+    private lateinit var viewModel: EntryStockViewModel
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
@@ -50,10 +49,10 @@ class EntryStockFragment : Fragment() {
             fabRefresh.visibility = View.GONE
 
             viewModel = ViewModelProvider(requireActivity())[
-                    HistoryViewModel::class.java
+                    EntryStockViewModel::class.java
             ]
             viewModel.getHistoryResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
-            viewModel.retrieveResponses(requireContext(), async = true, isEntryStock = true)
+            viewModel.retrieveResponses(requireContext(), async = true)
 
             fabRefresh.setOnClickListener {
                 refreshResponse()
@@ -93,7 +92,7 @@ class EntryStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), async = false, isEntryStock = true)
+                viewModel.retrieveResponses(requireContext(), async = false)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)

@@ -1,4 +1,4 @@
-package com.example.infinitestock.ui.stock.history
+package com.example.infinitestock.ui.stock.exitstock
 
 import android.content.Context
 import android.os.Looper
@@ -17,15 +17,14 @@ import com.loopj.android.http.SyncHttpClient
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
-class HistoryViewModel : ViewModel() {
+class ExitStockViewModel : ViewModel() {
 
     private val liveHistoryResponse = MutableLiveData<HistoryResponse>()
 
     fun getHistoryResponse(): LiveData<HistoryResponse> = liveHistoryResponse
 
     fun retrieveResponses(context: Context,
-                          async: Boolean = true,
-                          isEntryStock: Boolean
+                          async: Boolean = true
     ): HistoryResponse {
         try {
             Looper.prepare()
@@ -35,9 +34,7 @@ class HistoryViewModel : ViewModel() {
 
         var reportResponse = HistoryResponse()
         val account = SessionCompat(context).getAccount()
-        val url = context.resources.getString(R.string.server) +
-                    if (isEntryStock) "/warehouse/goods/report/goodsin"
-                    else "/warehouse/goods/report/goodsout"
+        val url = context.resources.getString(R.string.server) + "/warehouse/goods/report/goodsout"
 
         val client = if (async) AsyncHttpClient() else SyncHttpClient()
 

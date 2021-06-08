@@ -13,7 +13,6 @@ import com.example.infinitestock.R
 import com.example.infinitestock.data.entity.HistoryResponse
 import com.example.infinitestock.databinding.FragmentExitStockBinding
 import com.example.infinitestock.ui.stock.history.HistoryAdapter
-import com.example.infinitestock.ui.stock.history.HistoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -24,7 +23,7 @@ class ExitStockFragment : Fragment() {
     private var _binding: FragmentExitStockBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: HistoryViewModel
+    private lateinit var viewModel: ExitStockViewModel
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
@@ -51,10 +50,10 @@ class ExitStockFragment : Fragment() {
             fabRefresh.visibility = View.GONE
 
             viewModel = ViewModelProvider(requireActivity())[
-                    HistoryViewModel::class.java
+                    ExitStockViewModel::class.java
             ]
             viewModel.getHistoryResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
-            viewModel.retrieveResponses(requireContext(), async = true, isEntryStock = false)
+            viewModel.retrieveResponses(requireContext(), async = true)
 
             fabRefresh.setOnClickListener {
                 refreshResponse()
@@ -94,7 +93,7 @@ class ExitStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), async = false, isEntryStock = false)
+                viewModel.retrieveResponses(requireContext(), async = false)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)
