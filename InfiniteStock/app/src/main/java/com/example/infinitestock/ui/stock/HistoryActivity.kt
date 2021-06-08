@@ -1,6 +1,7 @@
 package com.example.infinitestock.ui.stock
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -19,15 +20,20 @@ class HistoryActivity : AppCompatActivity() {
         _binding = ActivityStockBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.customAppbar.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.history)
+
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabLayout)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
+        binding.viewPager.adapter = sectionsPagerAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+    }
 
-        supportActionBar?.elevation = 0f
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) super.onBackPressed()
+        return true
     }
 
     companion object {

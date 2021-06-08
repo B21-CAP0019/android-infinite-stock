@@ -9,6 +9,7 @@
     <include
         android:id="@+id/appbar_main"
         layout="@layout/custom_appbar"/>
+
     <TextView
         android:id="@+id/header_main"
         android:layout_width="wrap_content"
