@@ -23,7 +23,7 @@ class ExitStockFragment : Fragment() {
     private var _binding: FragmentExitStockBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ExitStockViewModel
+    private var viewModel: ExitStockViewModel? = null
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
@@ -52,8 +52,8 @@ class ExitStockFragment : Fragment() {
             viewModel = ViewModelProvider(requireActivity())[
                     ExitStockViewModel::class.java
             ]
-            viewModel.getHistoryResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
-            viewModel.retrieveResponses(requireContext(), async = true)
+            viewModel?.getHistoryResponse()?.observe(viewLifecycleOwner, { applyReportResponse(it)})
+            viewModel?.retrieveResponses(requireContext(), async = true)
 
             fabRefresh.setOnClickListener {
                 refreshResponse()
@@ -93,16 +93,16 @@ class ExitStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), async = false)
+                viewModel?.retrieveResponses(requireContext(), async = false)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)
         }
     }
 
-    private fun applyReportResponse(response: HistoryResponse) {
+    private fun applyReportResponse(response: HistoryResponse?) {
         binding.fabRefresh.visibility = View.VISIBLE
-        if (response.status == 200) {
+        if (response?.status == 200) {
             binding.customLoading.animationLoad.visibility = View.GONE
 
             if (response.totalData > 0) {
@@ -164,7 +164,7 @@ class ExitStockFragment : Fragment() {
             }
             binding.exitList.visibility = View.GONE
             historyAdapter.setItems(ArrayList())
-            Log.e("API Error", response.message!!)
+            Log.e("API Error", response?.message!!)
         }
     }
 }

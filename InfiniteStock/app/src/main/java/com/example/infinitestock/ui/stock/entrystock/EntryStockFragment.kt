@@ -22,7 +22,7 @@ class EntryStockFragment : Fragment() {
     private var _binding: FragmentEntryStockBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: EntryStockViewModel
+    private var viewModel: EntryStockViewModel? = null
     private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
@@ -51,8 +51,8 @@ class EntryStockFragment : Fragment() {
             viewModel = ViewModelProvider(requireActivity())[
                     EntryStockViewModel::class.java
             ]
-            viewModel.getHistoryResponse().observe(viewLifecycleOwner, { applyReportResponse(it)})
-            viewModel.retrieveResponses(requireContext(), async = true)
+            viewModel?.getHistoryResponse()?.observe(viewLifecycleOwner, { applyReportResponse(it)})
+            viewModel?.retrieveResponses(requireContext(), async = true)
 
             fabRefresh.setOnClickListener {
                 refreshResponse()
@@ -63,6 +63,7 @@ class EntryStockFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModel = null
     }
 
     private fun refreshResponse() {
@@ -92,16 +93,16 @@ class EntryStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), async = false)
+                viewModel?.retrieveResponses(requireContext(), async = false)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)
         }
     }
 
-    private fun applyReportResponse(response: HistoryResponse) {
+    private fun applyReportResponse(response: HistoryResponse?) {
         binding.fabRefresh.visibility = View.VISIBLE
-        if (response.status == 200) {
+        if (response?.status == 200) {
             binding.customLoading.animationLoad.visibility = View.GONE
 
             if (response.totalData > 0) {
@@ -163,7 +164,7 @@ class EntryStockFragment : Fragment() {
             }
             binding.entryList.visibility = View.GONE
             historyAdapter.setItems(ArrayList())
-            Log.e("API Error", response.message!!)
+            Log.e("API Error", response?.message!!)
         }
     }
 
