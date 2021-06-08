@@ -1,201 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/bg_color">
+
+    <include
+        android:id="@+id/appbar_update_goods"
+        layout="@layout/custom_appbar" />
+
+    <EditText
+        android:id="@+id/value_update_goods_name"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/appbar_update_goods"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/hint_goods_name"
+        android:inputType="text"
+        android:paddingHorizontal="20dp"
+        tools:ignore="Autofill" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include
-            android:id="@+id/appbar_update_goods"
-            layout="@layout/custom_appbar"/>
+        android:id="@+id/container_price_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/value_update_goods_name">
 
         <EditText
-            android:id="@+id/value_update_goods_name"
-            android:layout_width="350dp"
+            android:id="@+id/indonesian_valuta"
+            android:layout_width="80dp"
             android:layout_height="50dp"
-            android:background="@drawable/input_background"
-            android:layout_below="@+id/appbar_update_goods"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="27dp"
             android:layout_marginTop="10dp"
-            android:hint="@string/hint_goods_name"
+            android:background="@drawable/left_special_box"
+            android:enabled="false"
+            android:hint="@string/indonesian_valuta"
+            android:inputType="textEmailAddress"
             android:paddingHorizontal="20dp"
-            android:inputType="text"
-            tools:ignore="Autofill" />
-        <RelativeLayout
-            android:id="@+id/container_price_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/value_update_goods_name">
-            <EditText
-                android:id="@+id/indonesian_valuta"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="27dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/left_special_box"
-                android:hint="@string/indonesian_valuta"
-                android:textStyle="bold"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="-10dp"
-                android:enabled="false"
-                tools:ignore="Autofill"/>
-            <EditText
-                android:id="@+id/value_update_goods_price"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_toEndOf="@+id/indonesian_valuta"
-                android:layout_marginEnd="27dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/right_special_box"
-                android:hint="@string/hint_goods_price"
-                android:inputType="number"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
-                tools:ignore="Autofill"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/container_unit_stock_update"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/container_price_update"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="31dp">
-
-            <LinearLayout
-                android:id="@+id/goods_stock_update"
-                android:layout_width="160dp"
-                android:layout_height="58dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_decrease_update"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/round_btn"
-                    android:text="@string/btn_decrease" />
-
-                <EditText
-                    android:id="@+id/value_update_goods_stock"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:inputType="numberDecimal"
-                    android:paddingHorizontal="12dp"
-                    android:text="@string/number"
-                    tools:ignore="Autofill,LabelFor" />
-
-                <Button
-                    android:id="@+id/btn_increase_update"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/round_btn"
-                    android:text="@string/btn_increase" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/value_update_goods_unit"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_toEndOf="@+id/goods_stock_update"
-                android:background="@drawable/input_background"
-                android:hint="@string/hint_goods_unit"
-                android:inputType="text"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
-                android:textSize="18sp"
-                tools:ignore="Autofill" />
-        </RelativeLayout>
-        <LinearLayout
-            android:id="@+id/container_btn_update_predict"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_below="@+id/container_unit_stock_update"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            >
-            <Button
-                android:id="@+id/btn_update_goods"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:text="@string/btn_update"
-                android:textStyle="bold"
-                tools:ignore="ButtonStyle" />
-            <Button
-                android:id="@+id/btn_predict_goods"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:text="@string/btn_predict"
-                android:textStyle="bold"
-                tools:ignore="ButtonStyle" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/text_insufficient_stock_predict"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notif_insufficient_predict"
-            android:layout_below="@+id/container_btn_update_predict"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
+            android:paddingVertical="-10dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            tools:ignore="Autofill" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_loading"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="380dp"
-            android:layout_marginBottom="538dp"
-            android:visibility="gone"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
-        <TableLayout
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_insufficient_stock_predict"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp">
-            <TableRow
-                android:id="@+id/header_prediction"
-                android:background="@color/light_object_color"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="10dp"
-                android:visibility="gone"
-                >
-                <TextView
-                    android:text="@string/date_header_column"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:layout_weight="6"/>
-                <TextView
-                    android:text="@string/prediction_header_column"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:layout_weight="3"/>
-            </TableRow>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_predict"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"/>
-        </TableLayout>
+        <EditText
+            android:id="@+id/value_update_goods_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="27dp"
+            android:layout_toEndOf="@+id/indonesian_valuta"
+            android:background="@drawable/right_special_box"
+            android:hint="@string/hint_goods_price"
+            android:inputType="number"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            tools:ignore="Autofill" />
     </RelativeLayout>
-</ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/container_unit_stock_update"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_price_update"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="31dp">
+
+        <LinearLayout
+            android:id="@+id/goods_stock_update"
+            android:layout_width="160dp"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_decrease_update"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/round_btn"
+                android:text="@string/btn_decrease" />
+
+            <EditText
+                android:id="@+id/value_update_goods_stock"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="12dp"
+                android:text="@string/number"
+                tools:ignore="Autofill,LabelFor" />
+
+            <Button
+                android:id="@+id/btn_increase_update"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/round_btn"
+                android:text="@string/btn_increase" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/value_update_goods_unit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/goods_stock_update"
+            android:background="@drawable/input_background"
+            android:hint="@string/hint_goods_unit"
+            android:inputType="text"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="18sp"
+            tools:ignore="Autofill" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/container_btn_update_predict"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_unit_stock_update"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_update_goods"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="@string/btn_update"
+            android:textStyle="bold"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_predict_goods"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/btn_predict"
+            android:textStyle="bold"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_insufficient_stock_predict"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_btn_update_predict"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/notif_insufficient_predict"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/custom_loading"
+        layout="@layout/custom_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_btn_update_predict"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_loading"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignBottom="@+id/container_btn_update_predict"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
+
+    <TableLayout
+        android:id="@+id/table_prediction"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_btn_update_predict"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone">
+
+        <TableRow
+            android:id="@+id/header_prediction"
+            android:background="@color/light_object_color"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_weight="6"
+                android:gravity="center"
+                android:text="@string/date_header_column"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="@string/prediction_header_column"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_predict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableLayout>
+</RelativeLayout>

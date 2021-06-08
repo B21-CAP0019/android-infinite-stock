@@ -86,7 +86,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
     }
 
     private fun predictGoodsClick(id: Int) {
-        binding.animationLoading.visibility = View.VISIBLE
+        switchPredicting("loading", getString(R.string.predict_message))
         // query
         val url = resources.getString(R.string.server) + "/warehouse/goods/demand/predict/$id"
         val client = AsyncHttpClient()
@@ -109,23 +109,30 @@ class UpdateGoodsActivity : AppCompatActivity() {
                     Log.d("API", result)
 
                     // Parse response to WarehouseResponse
-                    //val message = response.getString("message")
+                    val status = response.getInt("status")
+                    val message = response.getString("message")
                     val data = response.getJSONArray("data")
                     //val dataPerDay = data.get("day")
 
                     val predictsItem = ArrayList<PredictStock>()
-                    if (data is JSONArray) {
-                        for (i in 0 until data.length()) {
-                            predictsItem.add(
-                                PredictStock(
-                                    date = data.getJSONObject(i).getString("date"),
-                                    qty = data.getJSONObject(i).getString("prediction")
+                    if (status != 0) {
+                        if (data is JSONArray) {
+                            for (i in 0 until data.length()) {
+                                predictsItem.add(
+                                    PredictStock(
+                                        date = data.getJSONObject(i).getString("date"),
+                                        qty = data.getJSONObject(i).getString("prediction")
+                                    )
                                 )
-                            )
+                            }
                         }
+                        // put on the recyclerView
+                        switchPredicting("done")
+                        binding.tablePrediction.visibility = View.VISIBLE
+                        showRecyclerList(predictsItem)
+                    } else {
+                        switchPredicting("error", message)
                     }
-                    // put on the recyclerView
-                    showRecyclerList(predictsItem)
                 }
             }
 
@@ -135,12 +142,7 @@ class UpdateGoodsActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                binding.animationLoading.visibility = View.INVISIBLE
-                Toast.makeText(
-                    this@UpdateGoodsActivity,
-                    "ErrorCode: $statusCode",
-                    Toast.LENGTH_SHORT
-                ).show()
+                switchPredicting("error", "[$statusCode]: ${ error?.localizedMessage.toString() }")
             }
         })
     }
@@ -188,6 +190,47 @@ class UpdateGoodsActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun switchPredicting(status: String, message: String = "") {
+        when (status) {
+            "loading" -> {
+                with(binding.customLoading) {
+                    root.visibility = View.VISIBLE
+                    animationLoad.visibility = View.VISIBLE
+                    animationEmpty.visibility = View.GONE
+                    animationError.visibility = View.GONE
+
+                    animationLoad.progress = 0.0F
+                    animationLoad.playAnimation()
+
+                    tvStatus.text = message
+                }
+            }
+            "error" -> {
+                with(binding.customLoading) {
+                    root.visibility = View.VISIBLE
+                    animationLoad.visibility = View.GONE
+                    animationEmpty.visibility = View.GONE
+                    animationError.visibility = View.VISIBLE
+
+                    animationError.progress = 0.0F
+                    animationError.playAnimation()
+
+                    tvStatus.text = message
+                }
+            }
+            "done" -> {
+                with(binding.customLoading) {
+                    root.visibility = View.GONE
+                    animationLoad.visibility = View.GONE
+                    animationEmpty.visibility = View.GONE
+                    animationError.visibility = View.GONE
+
+                    tvStatus.text = message
+                }
+            }
+        }
     }
 
     companion object{

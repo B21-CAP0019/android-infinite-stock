@@ -76,4 +76,5 @@
     <string name="delete_good">Deleting</string>
     <string name="history">History</string>
     <string name="empty_exit_stock">No Exit Stock has been reported.</string>
+    <string name="predict_message">Predicting...</string>
 </resources>
