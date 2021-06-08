@@ -2,6 +2,7 @@ package com.example.infinitestock.ui.login
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -54,6 +55,14 @@ class LoginActivity : AppCompatActivity() {
         binding.textToSignup.setOnClickListener {
             val intentToSignUpActivity = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intentToSignUpActivity)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            super.onBackPressed()
+        } else {
+            finishAfterTransition()
         }
     }
 

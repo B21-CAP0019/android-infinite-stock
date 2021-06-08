@@ -1,6 +1,7 @@
 package com.example.infinitestock.ui.splashscreen
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -133,6 +134,14 @@ class SplashScreenActivity : AppCompatActivity() {
                 })
             }
         }, 3000)
+    }
+
+    override fun onBackPressed() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            super.onBackPressed()
+        } else {
+            finishAfterTransition()
+        }
     }
 
     override fun onDestroy() {

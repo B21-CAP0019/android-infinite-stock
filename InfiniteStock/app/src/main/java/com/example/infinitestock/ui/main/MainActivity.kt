@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vibrate: Vibrator
     private lateinit var goodsAdapter : GoodsAdapter
 
-    private lateinit var viewModel: GoodsViewModel
+    private var viewModel: GoodsViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,8 +101,8 @@ class MainActivity : AppCompatActivity() {
             viewModel = ViewModelProvider(this@MainActivity)[
                     GoodsViewModel::class.java
             ]
-            viewModel.loadGoods().observe(this@MainActivity, { applyWarehouseResponse(it) })
-            viewModel.retrieveGoods(this@MainActivity, true)
+            viewModel?.loadGoods()?.observe(this@MainActivity, { applyWarehouseResponse(it) })
+            viewModel?.retrieveGoods(this@MainActivity, true)
 
             btnToAddGoods.setOnClickListener {
                 val intentToAddGoodsActivity = Intent(this@MainActivity, AddGoodsActivity::class.java)
@@ -171,10 +171,12 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredGoods = async(Dispatchers.IO) {
-                viewModel.retrieveGoods(this@MainActivity, false)
+                viewModel?.retrieveGoods(this@MainActivity, false)
             }
             val warehouseResponse = deferredGoods.await()
-            applyWarehouseResponse(warehouseResponse)
+            if (warehouseResponse != null) {
+                applyWarehouseResponse(warehouseResponse)
+            }
         }
     }
 
@@ -286,7 +288,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         _binding = null
+        viewModel = null
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            super.onBackPressed()
+        } else {
+            finishAfterTransition()
+        }
     }
 
     private fun applyWarehouseResponse(response: WarehouseResponse) {
