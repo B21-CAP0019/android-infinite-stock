@@ -59,7 +59,7 @@ class EntryStockViewModel : ViewModel() {
                                 ReportItem(
                                     dateTime = data.getJSONObject(i).getString("datetime"),
                                     name = data.getJSONObject(i).getString("goods_name"),
-                                    qty = data.getJSONObject(i).getDouble("goods_quantity").toString(),
+                                    qty = data.getJSONObject(i).getDouble("goods_quantity"),
                                     unit = data.getJSONObject(i).getString("goods_unit")
                                 )
                             )

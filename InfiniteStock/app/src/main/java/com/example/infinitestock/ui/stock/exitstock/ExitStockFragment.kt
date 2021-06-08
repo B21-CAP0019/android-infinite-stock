@@ -6,27 +6,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.infinitestock.R
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.infinitestock.databinding.FragmentExitStockBinding
+import com.example.infinitestock.ui.stock.HistoryAdapter
 
 class ExitStockFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ExitStockFragment()
-    }
+    private var _binding: FragmentExitStockBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: ExitStockViewModel
+    private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_exit_stock, container, false)
+    ): View {
+        _binding = FragmentExitStockBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ExitStockViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with (binding) {
+            historyAdapter = HistoryAdapter()
+            exitList.layoutManager = LinearLayoutManager(requireContext())
+            exitList.adapter = historyAdapter
+            exitList.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+
+            viewModel = ViewModelProvider(requireActivity())[
+                    ExitStockViewModel::class.java
+            ]
+            // TODO: Use the ViewModel
+        }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

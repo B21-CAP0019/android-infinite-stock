@@ -7,8 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.infinitestock.R
 import com.example.infinitestock.data.entity.ReportItem
 import com.example.infinitestock.databinding.CardHistoryBinding
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
-class HistoryAdapter(private val historyItems: ArrayList<ReportItem>): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+
+    private val historyItems = ArrayList<ReportItem>()
+
+    fun setItems(historyItems: ArrayList<ReportItem>) {
+        this.historyItems.clear()
+        this.historyItems.addAll(historyItems)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_history, parent, false)
@@ -31,8 +42,17 @@ class HistoryAdapter(private val historyItems: ArrayList<ReportItem>): RecyclerV
             with (binding) {
                 historyDate.text = reportItem.dateTime
                 historyName.text = reportItem.name
-                historyQuantity.text = reportItem.qty
-                historyUnit.text =reportItem.unit
+                historyQuantity.text = formatDecimal(reportItem.qty)
+                historyUnit.text = reportItem.unit
+            }
+        }
+
+        private fun formatDecimal(number: Double): String {
+            val epsilon = 0.004f
+            return if (abs(number.roundToInt() - number) < epsilon) {
+                String.format("%.0f", number)
+            } else {
+                String.format("%.2f", number)
             }
         }
     }

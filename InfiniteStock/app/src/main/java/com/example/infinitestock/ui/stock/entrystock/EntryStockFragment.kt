@@ -31,19 +31,18 @@ class EntryStockFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEntryStockBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.animationLoading.visibility = View.VISIBLE
-        showRecyclerList(requireActivity().let { viewModel.retrieveEntryReport(it.baseContext, async = true) })
+        //showRecyclerList(requireActivity().let { viewModel.retrieveEntryReport(it.baseContext, async = true) })
     }
 
     private fun showRecyclerList(list: ArrayList<ReportItem>) {
         binding.entryList.layoutManager = LinearLayoutManager(activity?.baseContext)
-        val historyAdapter = HistoryAdapter(list)
+        val historyAdapter = HistoryAdapter()
         binding.entryList.adapter = historyAdapter
 
         binding.animationLoading.visibility = View.INVISIBLE
