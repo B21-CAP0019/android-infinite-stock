@@ -93,7 +93,7 @@ class EntryStockFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val deferredReports = async(Dispatchers.IO) {
-                viewModel.retrieveResponses(requireContext(), async = false, isEntryStock = false)
+                viewModel.retrieveResponses(requireContext(), async = false, isEntryStock = true)
             }
             val reportResponse = deferredReports.await()
             applyReportResponse(reportResponse)
