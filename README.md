@@ -1,1 +1,1 @@
-# android-infinite-stock
+# Android Infinite Stock
